@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.qyh_practice.adapter.viewPagerAdapter
+import com.qyh_practice.adapter.ViewPagerAdapter
 import com.qyh_practice.databinding.ActivityMainBinding
 import com.qyh_practice.live.blindDateFragment
 import com.qyh_practice.message.messageFragment
 import com.qyh_practice.mine.myFragment
 import com.qyh_practice.moment.trendFragment
-import com.qyh_practice.recommendation.recommendationFragment
+import com.qyh_practice.recommendation.RecommendationFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     //ViewPager初始化
     private fun initViewPager() {
-        val recommendationFragment = recommendationFragment()
+        val recommendationFragment = RecommendationFragment()
         val blindDateFragment = blindDateFragment()
         val trendFragment = trendFragment()
         val messageFragment = messageFragment()
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //给viewPager设置addpter
-        val normalAdapter = viewPagerAdapter(supportFragmentManager, fragmentList)
+        val normalAdapter = ViewPagerAdapter(supportFragmentManager, fragmentList)
         viewPager.adapter = normalAdapter
         //预加载页数
         viewPager.offscreenPageLimit = fragmentList.size

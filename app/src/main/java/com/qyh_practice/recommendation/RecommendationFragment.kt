@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.qyh_practice.R
 
 
-class recommendationFragment : Fragment() {
+class RecommendationFragment : Fragment() {
 
 
     override fun onCreateView(

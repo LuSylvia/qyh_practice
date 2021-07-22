@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_message" />
     <fragment
         android:id="@+id/recommendationFragment"
-        android:name="com.qyh_practice.recommendation.recommendationFragment"
+        android:name="com.qyh_practice.recommendation.RecommendationFragment"
         android:label="recommendationFragment" />
     <fragment
         android:id="@+id/blindDateFragment"
