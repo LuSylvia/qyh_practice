@@ -1,0 +1,2 @@
+rootProject.name = "qyh_practice"
+include ':app'
