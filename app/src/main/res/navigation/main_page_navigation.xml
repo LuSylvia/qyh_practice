@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_page_navigation"
+    app:startDestination="@id/recommendationFragment">
+
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.qyh_practice.message.messageFragment"
+        android:label="message_fragment"
+        tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/recommendationFragment"
+        android:name="com.qyh_practice.recommendation.recommendationFragment"
+        android:label="recommendationFragment" />
+    <fragment
+        android:id="@+id/blindDateFragment"
+        android:name="com.qyh_practice.live.blindDateFragment"
+        android:label="blindDateFragment" />
+    <fragment
+        android:id="@+id/trendFragment"
+        android:name="com.qyh_practice.moment.trendFragment"
+        android:label="trendFragment" />
+    <fragment
+        android:id="@+id/myFragment"
+        android:name="com.qyh_practice.mine.myFragment"
+        android:label="myFragment" />
+</navigation>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_recommendation"
+        android:icon="@drawable/tab_button_recommend_normal"
+        android:title="@string/string_recommendation" />
+    <item
+        android:id="@+id/item_blindDate"
+        android:icon="@drawable/tab_button_live_normal"
+        android:title="@string/string_blindDate" />
+    <item
+        android:id="@+id/item_trend"
+        android:icon="@drawable/tab_button_moment_normal"
+        android:title="@string/string_trend" />
+    <item
+        android:id="@+id/item_message"
+        android:icon="@drawable/tab_button_message_normal"
+        android:title="@string/string_message"
+
+        />
+    <item
+        android:id="@+id/item_mine"
+        android:icon="@drawable/tab_button_mine_normal"
+        android:title="@string/string_mine" />
+
+</menu>

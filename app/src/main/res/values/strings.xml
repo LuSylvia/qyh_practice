@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">qyh_practice</string>
+    <string name="app_name">仿趣约会</string>
+    <string name="string_welcome">视频相亲找对象</string>
+    <string name="string_blindDate">相亲</string>
+    <string name="string_recommendation">推荐</string>
+    <string name="string_trend">动态</string>
+    <string name="string_message">消息</string>
+    <string name="string_mine">我的</string>
+
 </resources>
