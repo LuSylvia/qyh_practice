@@ -1,10 +1,8 @@
-//plugins {
-//    id 'com.android.application'
-//    id 'kotlin-android'
-//    id 'com.android.library'
-//}
-apply plugin: 'kotlin-android'
-apply plugin:'com.android.library'
+plugins {
+    //com.android.library或com.android.application必须在其他plugin之前
+    id 'com.android.library'
+    id 'kotlin-android'
+}
 
 android {
     compileSdkVersion 30
@@ -51,7 +49,7 @@ dependencies {
 
     api rootProject.ext.dependencies["gson"]
 
-    api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["okHttp3"]
     api rootProject.ext.dependencies["okHttp3LoggingInterceptor"]
     api rootProject.ext.dependencies["okHttp3Integration"]
 
