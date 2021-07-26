@@ -1,3 +1,4 @@
 rootProject.name = "qyh_practice"
 include ':app'
 include ':module_common'
+include ':module_login'

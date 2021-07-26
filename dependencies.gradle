@@ -67,8 +67,8 @@ ext{
             material                        :'com.google.android.material:material:1.2.1',
 
 
-            arouter_api                     : 'com.alibaba:arouter-api:1.4.1',
-            arouter_compiler                : 'com.alibaba:arouter-compiler:1.2.2',
+            arouter_api                     : 'com.alibaba:arouter-api:1.5.2',
+            arouter_compiler                : 'com.alibaba:arouter-compiler:1.5.2',
 
             rxlifecycle                     : "com.trello.rxlifecycle3:rxlifecycle:${rxlifecycleVersion}",
             rxlifecycleComponents           : "com.trello.rxlifecycle3:rxlifecycle-components:${rxlifecycleVersion}",
