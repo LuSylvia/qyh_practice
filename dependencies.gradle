@@ -1,0 +1,85 @@
+ext{
+    // android
+
+    android=[
+            compileSdkVersion   : 30,
+            //buildToolsVersion   : '27.0.2',
+            //applicationId       : 'com.***.***',
+            minSdkVersion       : 16,
+            targetSdkVersion    : 30,
+            versionCode         : 1,
+            versionName         : '1.0',
+
+            build_tools_version : '30.0.3',
+            kotlin_version      : '1.3.60'
+//            defaultPublishConfig: 'release',
+//            publishNonDefault   : true
+
+    ]
+
+
+    gson_version = '2.8.5'
+    lifecycle_version = "2.2.0"
+    rxlifecycleVersion = "3.0.0"
+    retrofit_version = "2.6.2"
+    glide_version="4.11.0"
+
+    ktx = [
+            appcompat           : "androidx.appcompat:appcompat:1.2.0",
+            core                : "androidx.core:core-ktx:1.3.0",
+            activity            : "androidx.activity:activity-ktx:1.1.0",
+            fragment            : "androidx.fragment:fragment-ktx:1.2.5",
+            lifecycle           : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+            livedata            : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            viewmodel           : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            viewmodel_extensions: "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            navigation_fragment :"androidx.navigation:navigation-fragment-ktx:2.3.0",
+            navigation_ui       :"androidx.navigation:navigation-ui-ktx:2.3.0"
+            // WorkManager 在部分手机上无效，不建议使用
+//            work                : 'androidx.work:work-runtime-ktx:2.3.1',
+    ]
+
+
+    dependencies = [
+            kotlin                          :"org.jetbrains.kotlin:kotlin-stdlib:1.5.20",
+            kotlinCoroutines                :'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt',
+            kotlinCoroutines_core           : 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt',
+
+            retrofit                        :"com.squareup.retrofit2:retrofit:$retrofit_version",
+            retrofitConvertGson             :"com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofitAdapterRxJava           :"com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+
+
+            okHttp3                         : 'com.squareup.okhttp3:okhttp:3.7.0',
+            okHttp3LoggingInterceptor       : 'com.squareup.okhttp3:logging-interceptor:3.7.0',
+            okHttp3Integration              : 'com.github.bumptech.glide:okhttp3-integration:1.5.0@aar',
+
+            gson                            :"com.google.code.gson:gson:${gson_version}",
+
+            glide                           :"com.github.bumptech.glide:glide:${glide_version}",
+
+            refreshLayout                   :'com.scwang.smart:refresh-layout-kernel:2.0.0',
+            refreshLayout_header            :'com.scwang.smart:refresh-header-classics:2.0.0',
+            refreshLayout_footer            :'com.scwang.smart:refresh-footer-classics:2.0.0',
+
+            constraintlayout                : 'androidx.constraintlayout:constraintlayout:2.0.4',
+
+            material                        :'com.google.android.material:material:1.2.1',
+
+
+            arouter_api                     : 'com.alibaba:arouter-api:1.4.1',
+            arouter_compiler                : 'com.alibaba:arouter-compiler:1.2.2',
+
+            rxlifecycle                     : "com.trello.rxlifecycle3:rxlifecycle:${rxlifecycleVersion}",
+            rxlifecycleComponents           : "com.trello.rxlifecycle3:rxlifecycle-components:${rxlifecycleVersion}",
+            rxBinding                       : "com.jakewharton.rxbinding3:rxbinding:${rxlifecycleVersion}",
+
+
+
+    ]
+
+
+
+
+
+}
