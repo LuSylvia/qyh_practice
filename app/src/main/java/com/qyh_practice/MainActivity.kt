@@ -3,9 +3,9 @@ package com.qyh_practice
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.example.module_common.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qyh_practice.adapter.ViewPagerAdapter
 import com.qyh_practice.databinding.ActivityMainBinding
@@ -15,7 +15,7 @@ import com.qyh_practice.mine.myFragment
 import com.qyh_practice.moment.trendFragment
 import com.qyh_practice.recommendation.RecommendationFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPager: ViewPager
     private lateinit var navView: BottomNavigationView
@@ -32,9 +32,16 @@ class MainActivity : AppCompatActivity() {
         viewPager = binding.viewPager
         navView = binding.navView
 
+        tv_main_title.setText("主界面")
+        tv_sub_title.setText("more")
+
         initViewPager()
         setListener()
 
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
     }
 
     //ViewPager初始化

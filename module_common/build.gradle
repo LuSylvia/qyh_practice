@@ -44,6 +44,8 @@ dependencies {
     api rootProject.ext.ktx["lifecycle"]
 
     api rootProject.ext.ktx["appcompat"]
+    //implementation 'androidx.appcompat:appcompat:1.2.0'
+
 
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["constraintlayout"]

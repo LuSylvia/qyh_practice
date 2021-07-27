@@ -3,12 +3,18 @@ package com.example.module_common;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.trello.rxlifecycle3.LifecycleProvider;
 
 public abstract class BaseActivity extends MyRxAppCompatActivity implements BaseView {
+    private static final String TAG = BaseActivity.class.getSimpleName();
+    private TextView tv_main_title, tv_sub_title;
+    private Toolbar toolbar;
+
     //是否显示标题栏，默认为true
     private boolean isShowTitle = true;
     //是否显示状态栏，默认为true
@@ -30,47 +36,94 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
         }
     }
 
+    public void findView() {
+        toolbar = findViewById(R.id.toolbar);
+        tv_main_title = findViewById(R.id.tv_main_title);
+        tv_sub_title = findViewById(R.id.tv_sub_title);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setScreenRoate(true);
-        if (!isShowTitle) {
-            //不显示标题栏
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        findView();
+        if (toolbar != null) {
+            //将toolbar显示到界面
+            setSupportActionBar(toolbar);
         }
-
-
-        initView();
-        initData();
+        if (tv_main_title != null) {
+            //getTitle得到的值是activity:label的属性
+            tv_main_title.setText(getTitle());
+            //设置默认的标题不显示
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /**
+         * 判断是否有Toolbar，并默认显示返回按钮
+         */
+        if (null != getToolbar() && isShowBacking()) {
+            showBack();
+        }
+    }
+
+    private void showBack() {
+        //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
+        //getToolbar().setNavigationIcon(R.mipmap.icon_back);
+        //getToolbar().setNavigationOnClickListener(v -> onBackPressed());
+    }
+
+
+    public Toolbar getToolbar() {
+        return findViewById(R.id.toolbar);
+    }
+
+    /**
+     * 设置主标题文字
+     *
+     * @param title
+     */
+    public void setMainTitle(CharSequence title) {
+        if (toolbar != null) {
+            toolbar.setTitle(title);
+        } else {
+            getToolbar().setTitle(title);
+            setSupportActionBar(getToolbar());
+        }
+    }
+
+    public TextView getTv_main_title() {
+        return tv_main_title;
+    }
+
+    public TextView getTv_sub_title() {
+        return tv_sub_title;
+    }
+
+    /**
+     * 是否显示返回按钮，默认显示
+     * 子类可重写该方法
+     *
+     * @return true
+     */
+    protected boolean isShowBacking() {
+        return true;
+    }
 
     //顺序：视图初始化->数据初始化
 
-    //设置布局
-    public abstract int initLayout();
-
-    //视图初始化
-    public abstract void initView();
-
-    //数据初始化
-    public abstract void initData();
-
-
     /**
-     * 设置是否显示标题栏
+     * 设置layout布局，子类必须重写该方法
+     *
+     * @return res Layout xml id
      */
-    public void setTitle(boolean isShowTitle) {
-        this.isShowTitle = isShowTitle;
-    }
+    protected abstract int getLayoutId();
 
-    /**
-     * 设置是否显示状态栏
-     */
-    public void setState(boolean isShowState) {
-        this.isShowState = isShowState;
-    }
 
     /**
      * 展示长时间的Toast
