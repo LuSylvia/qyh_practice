@@ -11,3 +11,5 @@ v0.04 加入了module_common、module_login模块
 其中，module_common模块加入了constants用于管理url,entity用于处理数据回调的实体，retrofit用于管理Retrofit实例
 
 module_login模块加入了登录用接口，loginViewModel，以及留待扩展的LoginActivity
+
+v0.045 初步实现BaseActivity、ActivityManager、BaseApplication，但涉及标题栏相关的函数尚未全部实现
