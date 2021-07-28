@@ -38,8 +38,8 @@ object RetrofitManager {
      */
     private fun initOkhttpClient(): OkHttpClient {
         val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(initLogInterceptor())
             .build()
 

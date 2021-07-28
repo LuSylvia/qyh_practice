@@ -40,6 +40,8 @@ ext {
     ]
 
 
+
+
     dependencies = [
             kotlin                   : "org.jetbrains.kotlin:kotlin-stdlib:1.5.20",
             kotlinCoroutines         : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt',
@@ -58,9 +60,10 @@ ext {
 
             glide                    : "com.github.bumptech.glide:glide:${glide_version}",
 
-            refreshLayout            : 'com.scwang.smart:refresh-layout-kernel:2.0.0',
-            refreshLayout_header     : 'com.scwang.smart:refresh-header-classics:2.0.0',
-            refreshLayout_footer     : 'com.scwang.smart:refresh-footer-classics:2.0.0',
+            refreshLayout            : "com.scwang.smart:refresh-layout-kernel:2.0.0",
+            refreshLayout_header     : "com.scwang.smart:refresh-header-classics:2.0.0",
+            refreshLayout_footer     : "com.scwang.smart:refresh-footer-classics:2.0.0",
+
 
             constraintlayout         : 'androidx.constraintlayout:constraintlayout:2.0.4',
 
@@ -73,6 +76,8 @@ ext {
             rxlifecycle              : "com.trello.rxlifecycle3:rxlifecycle:${rxlifecycleVersion}",
             rxlifecycleComponents    : "com.trello.rxlifecycle3:rxlifecycle-components:${rxlifecycleVersion}",
             rxBinding                : "com.jakewharton.rxbinding3:rxbinding:${rxlifecycleVersion}",
+
+
 
 
     ]

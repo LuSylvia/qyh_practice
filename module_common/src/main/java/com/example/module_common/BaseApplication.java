@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.module_common.retrofit.ActivityManager;
 
 import java.lang.ref.WeakReference;
 

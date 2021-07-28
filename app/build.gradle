@@ -74,13 +74,17 @@ dependencies {
 
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["constraintlayout"]
-    implementation project(path: ':module_common')
+
+
+    api rootProject.ext.dependencies["refreshLayout"]
+    api rootProject.ext.dependencies["refreshLayout_header"]
+
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
     implementation 'com.android.support:multidex:1.0.3'
-    implementation project(path: ':module_login')
+    implementation project(path: ':module_common')
     implementation project(path: ':module_login')
 
 

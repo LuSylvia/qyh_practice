@@ -1,4 +1,4 @@
-package com.example.module_common;
+package com.example.module_common.adapter;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.module_common.BaseView;
+import com.example.module_common.MyRxAppCompatActivity;
+import com.example.module_common.R;
 import com.trello.rxlifecycle3.LifecycleProvider;
 
 public abstract class BaseActivity extends MyRxAppCompatActivity implements BaseView {

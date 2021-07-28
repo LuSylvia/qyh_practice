@@ -25,7 +25,7 @@
         android:layout_marginTop="60dp"
         android:drawablePadding="5dp"
         android:gravity="center_horizontal"
-        android:text="@string/login_header_txt"
+        android:text="@string/string_login_header_txt"
         android:textColor="#333333"
         app:drawableTopCompat="@drawable/img_login_avatars"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,15 +132,15 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="121dp"
-        android:layout_height="121dp"
+        android:layout_width="92dp"
+        android:layout_height="83dp"
         android:background="@drawable/arrow_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772" />
+        app:layout_constraintVertical_bias="0.77" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

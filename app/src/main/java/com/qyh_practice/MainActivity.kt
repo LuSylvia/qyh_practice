@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.example.module_common.BaseActivity
+import com.example.module_common.adapter.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qyh_practice.adapter.ViewPagerAdapter
 import com.qyh_practice.databinding.ActivityMainBinding
