@@ -16,6 +16,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
         <!--标题栏的背景色 -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--状态栏的背景色 -->

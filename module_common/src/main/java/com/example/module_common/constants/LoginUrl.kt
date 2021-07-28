@@ -3,9 +3,17 @@ package com.example.module_common.constants
 class LoginUrl : BaseUrl() {
     companion object {
         /**
-         * 登陆
+         * 登录
+         * 需要手机号，验证码，微信token
          */
         const val USER_LOGIN: String = "/account/mobileLogin.do"
+
+        /**
+         * 登录
+         * 只需要手机号，验证码
+         */
+        const val USER_LOGIN_WITHOUTTOKEN: String = "/account/mobileLoginExistAccount.do"
+
 
         /**
          * 获取验证码

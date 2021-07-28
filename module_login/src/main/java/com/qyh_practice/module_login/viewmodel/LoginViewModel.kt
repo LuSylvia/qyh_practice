@@ -12,14 +12,20 @@ class LoginViewModel : ViewModel() {
     //val
     val loadState = MutableLiveData<LoadState>()
 
-    suspend fun login(phone: String, code: String, stageToken: String) {
+    /**
+     * 登录
+     * 需要根据返回值来处理具体逻辑
+     */
+    fun login(phone: String, code: String): String? {
+        var retMsg: String? = null
         viewModelScope.launch {
             loadState.value = LoadState.LOADING
             val loginService: LoginService = RetrofitManager.getService(LoginService::class.java)
-            val responseBody = loginService.identityLogin(phone, code, stageToken)
+            val responseBody = loginService.mobileLoginExistAccount(phone, code)
             if (responseBody.isError) {
                 //请求失败，网络异常
                 loadState.value = LoadState.FAIL
+                retMsg = responseBody.errorMessage
 
 
             } else {
@@ -27,7 +33,19 @@ class LoginViewModel : ViewModel() {
             }
 
         }
+        return retMsg
 
+    }
+
+    /**
+     * 获取验证码
+     * 该函数不需要处理返回值
+     */
+    fun getSmsCode(phone: String, type: Int) {
+        viewModelScope.launch {
+            val loginService = RetrofitManager.getService(LoginService::class.java)
+            loginService.getSmsCode(phone, type)
+        }
     }
 
 }

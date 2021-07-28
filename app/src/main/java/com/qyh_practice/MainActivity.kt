@@ -1,7 +1,6 @@
 package com.qyh_practice
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -27,22 +26,26 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
+
         setContentView(view)
 
         viewPager = binding.viewPager
         navView = binding.navView
+        //子Activity中必须显示调用此函数来获取title控件
+        findView()
+        if (tv_main_title != null) {
+            tv_main_title.setText("仿趣约会")
 
-        tv_main_title.setText("主界面")
-        tv_sub_title.setText("more")
+        }
+        toolbar.setLogo(R.drawable.ic_dashboard_black_24dp)
+        //tv_sub_title.setText("more")
 
         initViewPager()
         setListener()
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_main
-    }
+
 
     //ViewPager初始化
     private fun initViewPager() {
@@ -112,7 +115,7 @@ class MainActivity : BaseActivity() {
             override fun onPageSelected(position: Int) {
                 if (menuItem != null) {
                     //如果有已经选中的item，取消它的选中状态
-                    Log.d("ERR_MENUITEM", "null还走这分支")
+                    //Log.d("ERR_MENUITEM", "null还走这分支")
                     menuItem!!.isChecked = false
                 } else {
                     //如果没有，则取消默认的选中状态(第一个item)

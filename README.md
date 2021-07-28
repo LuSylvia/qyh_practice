@@ -13,3 +13,5 @@ v0.04 加入了module_common、module_login模块
 module_login模块加入了登录用接口，loginViewModel，以及留待扩展的LoginActivity
 
 v0.045 初步实现BaseActivity、ActivityManager、BaseApplication，但涉及标题栏相关的函数尚未全部实现
+
+v0.05 基本实现了BaseActivity，验证码输入框DentifyingCodeView、LoginActivity的主要功能，目前遇到http 428的问题，尚待解决

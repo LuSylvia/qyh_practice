@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         * */
         val coroutineScope = CoroutineScope(Dispatchers.IO)
         coroutineScope.launch {
-            delay(3000)
+            delay(1000)
             jumpToMainPage()
         }
 
@@ -30,7 +30,7 @@ class SplashActivity : AppCompatActivity() {
 
 
     private fun jumpToMainPage() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         this.finish()
     }

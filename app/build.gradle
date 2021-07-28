@@ -10,6 +10,8 @@ android {
 
 
     defaultConfig {
+        //允许多个dex
+        multiDexEnabled true
         //applicationId "com.qyh_practice"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -74,11 +76,22 @@ dependencies {
     api rootProject.ext.dependencies["constraintlayout"]
     implementation project(path: ':module_common')
 
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation project(path: ':module_login')
+    implementation project(path: ':module_login')
+
+
+    //implementation 'com.jacktuotuo.customview:verificationcodeview:1.0.5'
 
     testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
 
 
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'

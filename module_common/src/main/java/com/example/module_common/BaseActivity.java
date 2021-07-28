@@ -3,6 +3,7 @@ package com.example.module_common;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +47,11 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //屏蔽系统的标题栏
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setScreenRoate(true);
-        findView();
+        //findView();
         if (toolbar != null) {
             //将toolbar显示到界面
             setSupportActionBar(toolbar);
@@ -55,8 +59,6 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
         if (tv_main_title != null) {
             //getTitle得到的值是activity:label的属性
             tv_main_title.setText(getTitle());
-            //设置默认的标题不显示
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
     }
@@ -122,7 +124,7 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
      *
      * @return res Layout xml id
      */
-    protected abstract int getLayoutId();
+    //protected abstract int getLayoutId();
 
 
     /**

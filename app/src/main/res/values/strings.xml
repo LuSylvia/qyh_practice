@@ -7,4 +7,13 @@
     <string name="string_message">消息</string>
     <string name="string_mine">我的</string>
 
+
+    <string name="login_header_txt"><![CDATA[为你匹配到1000位同城异性,登录后可见]]></string>
+    <string name="string_login_hint">点击输入手机号码</string>
+    <string name="string_phone">手机号</string>
+    <string name="string_verifycode">验证码</string>
+    <string name="string_get_dentifyingcode">获取验证码</string>
+    <string name="string_phone_error">请输入11位手机号!</string>
+    <string name="string_verifycode_error">请输入4位验证码!</string>
+
 </resources>

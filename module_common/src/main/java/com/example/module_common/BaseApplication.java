@@ -36,6 +36,7 @@ public class BaseApplication extends Application {
 
             registerActivityLifecycle();
 
+
             ARouter.init(this);//尽可能早，推荐在Application模块初始化
         }
 
