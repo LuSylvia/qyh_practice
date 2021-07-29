@@ -1,4 +1,4 @@
-package com.example.module_common.adapter;
+package com.example.module_common;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.module_common.BaseView;
-import com.example.module_common.MyRxAppCompatActivity;
-import com.example.module_common.R;
 import com.trello.rxlifecycle3.LifecycleProvider;
 
 public abstract class BaseActivity extends MyRxAppCompatActivity implements BaseView {
@@ -69,9 +66,7 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
     @Override
     protected void onStart() {
         super.onStart();
-        /**
-         * 判断是否有Toolbar，并默认显示返回按钮
-         */
+        //判断是否有Toolbar，并默认显示返回按钮
         if (null != getToolbar() && isShowBacking()) {
             showBack();
         }

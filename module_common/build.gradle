@@ -10,6 +10,7 @@ android {
 
 
     defaultConfig {
+        multiDexEnabled true
         //applicationId "com.example.module_common"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -43,7 +44,18 @@ dependencies {
     api rootProject.ext.ktx["viewmodel"]
     api rootProject.ext.ktx["lifecycle"]
 
-    api rootProject.ext.ktx["appcompat"]
+    //api rootProject.ext.ktx["appcompat"]
+    //api rootProject.ext.dependencies.refreshLayout
+    implementation 'androidx.appcompat:appcompat:1.2.0'                 //必须 1.0.0 以上
+
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
+    implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
+    implementation  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
+    implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'   //二级刷新头
+    implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲加载
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
     //implementation 'androidx.appcompat:appcompat:1.2.0'
 
 
@@ -64,9 +76,9 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycleComponents"]
     api rootProject.ext.dependencies["rxBinding"]
 
-    api rootProject.ext.dependencies["refreshLayout"]
-    api rootProject.ext.dependencies["refreshLayout_header"]
-    api rootProject.ext.dependencies["refreshLayout_footer"]
+    //api rootProject.ext.dependencies["refreshLayout"]
+    //api rootProject.ext.dependencies["refreshLayout_header"]
+//    api rootProject.ext.dependencies["refreshLayout_footer"]
 
 
 
@@ -75,6 +87,8 @@ dependencies {
 
 //    api 'com.alibaba:arouter-api:1.5.2'
 //    api 'com.alibaba:arouter-compiler:1.5.2'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 
     testImplementation 'junit:junit:4.13.2'
@@ -86,5 +100,6 @@ dependencies {
     //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
+
     mavenCentral()
 }

@@ -1,0 +1,97 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["build_tools_version"]
+
+    defaultConfig {
+        multiDexEnabled true
+        //applicationId "com.qyh_practice.module_recommend"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+//        minSdkVersion 16
+//        targetSdkVersion 30
+//        versionCode 1
+//        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    api rootProject.ext.dependencies["kotlin"]
+    api rootProject.ext.dependencies["kotlinCoroutines"]
+    api rootProject.ext.dependencies["kotlinCoroutines_core"]
+
+    api rootProject.ext.ktx["appcompat"]
+    api rootProject.ext.ktx["core"]
+    api rootProject.ext.ktx["livedata"]
+    api rootProject.ext.ktx["viewmodel"]
+    api rootProject.ext.ktx["lifecycle"]
+
+    api rootProject.ext.dependencies["material"]
+    api rootProject.ext.dependencies["constraintlayout"]
+
+    api rootProject.ext.dependencies["gson"]
+
+    api rootProject.ext.dependencies["okHttp3"]
+    api rootProject.ext.dependencies["okHttp3LoggingInterceptor"]
+    api rootProject.ext.dependencies["okHttp3Integration"]
+
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofitConvertGson"]
+    api rootProject.ext.dependencies["retrofitAdapterRxJava"]
+
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycleComponents"]
+    api rootProject.ext.dependencies["rxBinding"]
+
+    api rootProject.ext.dependencies["arouter_api"]
+    api rootProject.ext.dependencies["arouter_compiler"]
+
+    api rootProject.ext.paging3.paging_runtime
+    api rootProject.ext.paging3.paging_common
+    api rootProject.ext.paging3.paging_compose
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation project(path: ':module_common')
+
+
+
+    testImplementation 'junit:junit:4.13.2'
+
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation 'androidx.core:core-ktx:1.3.1'
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.android.material:material:1.2.1'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

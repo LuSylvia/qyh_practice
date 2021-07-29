@@ -2,8 +2,6 @@ package com.example.module_common;
 
 import android.app.Activity;
 
-import com.example.module_common.adapter.BaseActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;

@@ -14,4 +14,8 @@ module_login模块加入了登录用接口，loginViewModel，以及留待扩展
 
 v0.045 初步实现BaseActivity、ActivityManager、BaseApplication，但涉及标题栏相关的函数尚未全部实现
 
-v0.05 基本实现了BaseActivity，验证码输入框DentifyingCodeView、LoginActivity的主要功能，目前遇到http 428的问题，尚待解决
+v0.05 基本实现了BaseActivity，验证码输入框DentifyingCodeView、LoginActivity的主要功能
+
+v0.06 实现了登录功能，获取配置并自动登录功能还有待完善
+      
+推荐页面基本的网络请求逻辑已经在RecommendViewModel中实现

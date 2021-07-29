@@ -2,7 +2,7 @@ package com.qyh_practice
 
 import android.content.Intent
 import android.os.Bundle
-import com.example.module_common.adapter.BaseActivity
+import com.example.module_common.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

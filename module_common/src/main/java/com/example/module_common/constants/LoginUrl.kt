@@ -9,11 +9,11 @@ class LoginUrl : BaseUrl() {
         const val USER_LOGIN: String = "/account/mobileLogin.do"
 
         /**
-         * 登录
-         * 只需要手机号，验证码
+         * 获取APP配置
+         * 未登陆过时，需要调用上面的USER_LOGIN接口后，才能调用本接口
+         * 已登陆过时，直接在闪屏页调用该接口，获取配置后，进入MainActivity
          */
-        const val USER_LOGIN_WITHOUTTOKEN: String = "/account/mobileLoginExistAccount.do"
-
+        const val GET_APP_CONFIG:String="/system/appConfig.do"
 
         /**
          * 获取验证码
@@ -25,9 +25,5 @@ class LoginUrl : BaseUrl() {
          */
         const val SEND_PHONE_IDENTITY: String = "api/business/smscode/sendMobileCode.do"
 
-        /**
-         * 临时授权码登录
-         */
-        const val LOGIN_BY_STAGE_TOKEN: String = "account/loginByStageToken.do"
     }
 }

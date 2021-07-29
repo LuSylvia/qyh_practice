@@ -9,7 +9,9 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.example.module_common.adapter.BaseActivity
+import androidx.lifecycle.Observer
+import com.example.module_common.BaseActivity
+import com.example.module_common.entity.LoadState
 import com.qyh_practice.databinding.ActivityLoginBinding
 import com.qyh_practice.module_login.viewmodel.LoginViewModel
 import java.util.regex.Pattern
@@ -17,16 +19,18 @@ import java.util.regex.Pattern
 class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
+    private var waitCountDown:Boolean=false //用于标识获取验证码按钮是否正在等待倒计时
 
     //实现倒计时功能（默认30s）
     private val timer: CountDownTimer = object : CountDownTimer(30000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            binding.btnGetDentifyingcode.setText("重新发送(${millisUntilFinished / 1000}秒)")
+            binding.btnGetDentifyingcode.setText("重新发送(${millisUntilFinished / 1000})")
 
         }
 
         override fun onFinish() {
             binding.btnGetDentifyingcode.setText("获取验证码")
+            waitCountDown=false
             binding.btnGetDentifyingcode.isEnabled = true
 
         }
@@ -39,6 +43,31 @@ class LoginActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
         init()
+        loginViewModel.loadState.observe(this, Observer {
+            when(it){
+                LoadState.LOADING->{
+                    //啥都不做
+                    Log.d("LoginActivity","在loading")
+                }
+                LoadState.SUCCESS->{
+                    Log.d("LoginActivity","登录成功")
+                    //跳转主界面
+                    val intent = Intent(this,MainActivity::class.java)
+                    startActivity(intent)
+                }
+                LoadState.FAIL->{
+                    //打印错误信息
+                    Log.d("LoginActivity","登录失败")
+                }
+                else -> {
+                    Log.d("LoginActivity","未知的错误（虽然也不太可能）")
+                }
+            }
+
+        }
+
+        )
+
     }
 
     //初始化操作
@@ -58,11 +87,15 @@ class LoginActivity : BaseActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 //binding.tvPhoneError.visibility = View.INVISIBLE
-
+                //只要用户在修改手机号，获取验证码的按钮就应该设为不可点击
+                edPhoneRelatedChange(0)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                s?.let { edPhoneRelatedChange(it.length) }
+                if(waitCountDown==false){
+                    s?.let { edPhoneRelatedChange(it.length) }
+                }
+
             }
         })
         //监听验证码的输入情况
@@ -92,6 +125,7 @@ class LoginActivity : BaseActivity() {
                     try {
                         //loginViewModel.getSmsCode(phone, 1)
                         timer.start()
+                        waitCountDown=true
                         binding.btnGetDentifyingcode.isEnabled = false
                         binding.btnGetDentifyingcode.setBackgroundColor(resources.getColor(R.color.grey))
                     } catch (e: java.lang.Exception) {
@@ -105,35 +139,22 @@ class LoginActivity : BaseActivity() {
         }
 
         //3.真正的登录逻辑的实现
-        //采用的接口是不需要微信stageToken的接口
-        //传入手机号phone，验证码code
+        //采用的接口是需要微信stageToken的接口
+        //传入手机号phone，验证码code,stageToken(该属性传"")
         binding.btnLogin.setOnClickListener {
             run {
-                //(1)从edPhone获取手机号
+                //(1)从edPhone获取手机号和验证码
                 val phone: String = binding.edPhone.text.toString()
-                if (phone.length != 11) {
-                    Log.d("LoginActivity", "手机号异常+${phone}+${phone.length}")
-                    return@setOnClickListener
-                }
-                Log.d("LoginActivity", "手机号是${phone}")
-                //（2）从edDentifyingcode获取验证码
                 val code: String = binding.edDentifyingcode.text.toString()
-                if (code.length != 4) {
-                    Log.d("LoginActivity", "验证码异常+${code}+${code.length}")
+
+                if (phone.length != 11||code.length!=4) {
                     return@setOnClickListener
                 }
-                Log.d("LoginActivity", "验证码是${code}")
-                val errorMsg: String? = loginViewModel.login(phone, code)
-                if (errorMsg == null) {
-                    //代表成功
-                    //跳转到MainActivity
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    //代表失败
-                    //啥都不动，还得弹错误信息
-                    Log.d("LoginActivity", errorMsg)
-                }
+                //调用登录函数，获取错误信息
+                //成功后，它会自动调用getConfig函数
+                loginViewModel.login(phone,code,"")
+
+
 
             }
         }

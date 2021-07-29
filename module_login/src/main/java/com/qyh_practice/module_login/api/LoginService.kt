@@ -1,6 +1,7 @@
 package com.qyh_practice.module_login.api
 
 import com.example.module_common.constants.LoginUrl
+import com.example.module_common.entity.AppConfigEntity
 import com.example.module_common.entity.ResponseEntity
 import com.qyh_practice.module_login.entity.LoginEntity
 import retrofit2.http.Field
@@ -27,18 +28,10 @@ interface LoginService {
     ): ResponseEntity<LoginEntity>
 
 
-    /**
-     * 用户验证码登录（不需要微信Token）
-     * @param phone
-     * @param code
-     *
-     */
-    @FormUrlEncoded
-    @POST(LoginUrl.USER_LOGIN_WITHOUTTOKEN)
-    suspend fun mobileLoginExistAccount(
-        @Field("mobile") phone: String,
-        @Field("code") code: String
-    ): ResponseEntity<LoginEntity>
+
+    @GET(LoginUrl.GET_APP_CONFIG)
+    suspend fun getAppConfig():ResponseEntity<AppConfigEntity>;
+
 
 
     /**

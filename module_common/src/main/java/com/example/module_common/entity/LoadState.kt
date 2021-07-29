@@ -4,5 +4,6 @@ package com.example.module_common.entity
 enum class LoadState {
     SUCCESS,
     FAIL,
-    LOADING
+    LOADING,
+    EMPTY
 }

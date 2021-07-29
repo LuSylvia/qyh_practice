@@ -23,6 +23,7 @@ ext {
     rxlifecycleVersion = "3.0.0"
     retrofit_version = "2.6.2"
     glide_version = "4.11.0"
+    paging_version = "3.0.0"
 
     ktx = [
             appcompat           : "androidx.appcompat:appcompat:1.2.0",
@@ -39,6 +40,21 @@ ext {
 //            work                : 'androidx.work:work-runtime-ktx:2.3.1',
     ]
 
+    paging3 =[
+            paging_runtime  : "androidx.paging:paging-runtime:$paging_version",
+
+            // alternatively - without Android dependencies for tests
+            paging_common   :"androidx.paging:paging-common:$paging_version",
+
+            // optional - RxJava2 support
+            paging_rxjava2  :"androidx.paging:paging-rxjava2:$paging_version",
+
+            // optional - RxJava3 support
+            paging_rxjava3  :"androidx.paging:paging-rxjava3:$paging_version",
+
+            // optional - Jetpack Compose integration
+            paging_compose  :"androidx.paging:paging-compose:1.0.0-alpha11",
+    ]
 
 
 

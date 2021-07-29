@@ -1,8 +1,8 @@
-package com.example.module_common
+package com.example.module_common.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.module_common.adapter.SimpleViewHolder
+import com.example.module_common.R
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
