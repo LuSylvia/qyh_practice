@@ -66,7 +66,7 @@ dependencies {
 
     api rootProject.ext.dependencies["refreshLayout"]
     api rootProject.ext.dependencies["refreshLayout_header"]
-    //api rootProject.ext.dependencies["refreshLayout_footer"]
+    api rootProject.ext.dependencies["refreshLayout_footer"]
 
 
 
