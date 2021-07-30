@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        mInstance=this;
         super.onCreate();
         if (!isInMainProcess) {
             isInMainProcess = true;
@@ -113,6 +115,13 @@ public class BaseApplication extends Application {
     }
 
     public static Context getContext() {
+        if(mInstance==null){
+            Log.d("BaseApplication","instance=null");
+        }
+        if(mInstance.getApplicationContext()==null){
+            Log.d("BaseApplication","context=null");
+        }
+
         return mInstance.getApplicationContext();
     }
 

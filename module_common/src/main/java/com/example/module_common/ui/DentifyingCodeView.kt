@@ -1,4 +1,4 @@
-package com.example.module_common
+package com.example.module_common.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatEditText
+import com.example.module_common.R
 import java.util.*
 
 class DentifyingCodeView @JvmOverloads constructor(

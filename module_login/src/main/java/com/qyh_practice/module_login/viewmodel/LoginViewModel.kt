@@ -2,7 +2,6 @@ package com.qyh_practice.module_login.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.module_common.BaseViewModel
 import com.example.module_common.entity.AppConfigEntity
@@ -10,8 +9,6 @@ import com.example.module_common.entity.LoadState
 import com.example.module_common.retrofit.RetrofitManager
 import com.example.module_common.retrofit.launch
 import com.qyh_practice.module_login.api.LoginService
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -29,18 +26,23 @@ class LoginViewModel : BaseViewModel() {
             loadState.value=LoadState.LOADING
             val loginService: LoginService = RetrofitManager.getService(LoginService::class.java)
 
-            val loginResponse=async { loginService.mobileLogin(phone,code, stageToken).errorMessage }
+            val loginResponse=async { loginService.mobileLogin(phone,code, stageToken) }
             //等登录接口的返回值
-            val loginErrMsg=loginResponse.await()
+            val loginErrMsg=loginResponse.await().errorMessage
 
             if(!loginErrMsg.equals("")){
                 //出错
                 Log.d("LoginViewModel-login","登录失败，提示是${loginErrMsg}")
                     loadState.value=LoadState.FAIL
             }else{
-                //loadState.value=LoadState.SUCCESS
+
+                RetrofitManager.setToken(loginResponse.await().data.temporaryToken)
                 val appConfigMsg=async { loginService.getAppConfig().errorMessage }
                 Log.d("LoginViewModel-msg","配置异常,提示是${appConfigMsg.await()}")
+                Log.d("LoginViewModel-msg","Token是${loginResponse.await().data.temporaryToken}")
+
+                //loadState.value=LoadState.SUCCESS
+
             }
 
         },{
@@ -48,9 +50,6 @@ class LoginViewModel : BaseViewModel() {
         }
 
         )
-
-
-
 
     }
 

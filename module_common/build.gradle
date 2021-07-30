@@ -76,6 +76,8 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycleComponents"]
     api rootProject.ext.dependencies["rxBinding"]
 
+
+    api rootProject.ext.dependencies.zhenaiLibSecurity
     //api rootProject.ext.dependencies["refreshLayout"]
     //api rootProject.ext.dependencies["refreshLayout_header"]
 //    api rootProject.ext.dependencies["refreshLayout_footer"]

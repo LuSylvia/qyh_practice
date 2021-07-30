@@ -11,6 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.trello.rxlifecycle3.LifecycleProvider;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public abstract class BaseActivity extends MyRxAppCompatActivity implements BaseView {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private TextView tv_main_title, tv_sub_title;
@@ -60,6 +66,15 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
             //getTitle得到的值是activity:label的属性
             tv_main_title.setText(getTitle());
         }
+        Interceptor interceptor=new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request=chain.request().newBuilder()
+                        .header("headname","value")
+                        .build();
+                return null;
+            }
+        };
 
     }
 

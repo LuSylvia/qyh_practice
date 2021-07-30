@@ -19,3 +19,9 @@ v0.05 基本实现了BaseActivity，验证码输入框DentifyingCodeView、Login
 v0.06 实现了登录功能，获取配置并自动登录功能还有待完善
       
 推荐页面基本的网络请求逻辑已经在RecommendViewModel中实现
+
+v0.07 添加了RequestInterceptor及相关类，已经能够获取ua信息
+
+推荐页item的布局,adapter已经实现
+
+后续会用Paing3完成分页加载，更新推荐页

@@ -100,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
 
-    <com.example.module_common.DentifyingCodeView
+    <com.example.module_common.ui.DentifyingCodeView
         android:id="@+id/ed_dentifyingcode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

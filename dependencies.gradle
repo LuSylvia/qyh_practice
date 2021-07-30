@@ -67,6 +67,8 @@ ext {
             retrofitConvertGson      : "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofitAdapterRxJava    : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
 
+            zhenaiLibSecurity        : 'com.zhenai.lib:android-security:1.1.0',
+
 
             okHttp3                  : 'com.squareup.okhttp3:okhttp:3.7.0',
             okHttp3LoggingInterceptor: 'com.squareup.okhttp3:logging-interceptor:3.7.0',
