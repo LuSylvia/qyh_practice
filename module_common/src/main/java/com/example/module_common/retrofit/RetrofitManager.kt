@@ -4,8 +4,7 @@ import android.util.Log
 import com.example.module_common.constants.BaseUrl
 import com.example.module_common.device.DeviceInfoManager
 import com.google.gson.Gson
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -48,9 +47,26 @@ object RetrofitManager {
             .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(initLogInterceptor())
             .addInterceptor(initRequestIntercepetor())
+            .cookieJar(object : CookieJar {
+                override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
+                    if (!cookies.isNullOrEmpty()) {
+                        mCookieMap[getDomain(url)] = cookies
+                    }
+                }
+
+                override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
+                    return mCookieMap[getDomain(url)] ?: arrayListOf()
+                }
+            })
             .build()
 
         return okHttpClient
+    }
+
+    private var mCookieMap = HashMap<String, MutableList<Cookie>>()
+
+    private fun getDomain(url: HttpUrl):String {
+        return url.topPrivateDomain() ?: url.host() ?: ""
     }
 
 
@@ -59,12 +75,20 @@ object RetrofitManager {
             val requestBuilder = chain.request().newBuilder()
             //更新此处的value为DeviceInfoManager.getUAInfo(String key)
             //1.先从本地读取缓存
-            val request = if (loginToken == null || loginToken.equals("")) {
-                requestBuilder.build()
-            } else {
-                requestBuilder.addHeader("ua", DeviceInfoManager.getInstance().getUAInfo(loginToken))
-                    .build()
-            }
+//            val request = if (loginToken == null || loginToken.equals("")) {
+//                requestBuilder.build()
+//            } else {
+//                requestBuilder.addHeader("ua", DeviceInfoManager.getInstance().getUAInfo(loginToken))
+//                    .build()
+//            }
+
+            val request = requestBuilder
+                .addHeader("Accept-Charset", "UTF-8,*;q=0.5")
+                .addHeader("Cache-Control", "no-cache")
+                .addHeader("Connection", "Keep-Alive")
+                .addHeader("ua", DeviceInfoManager.getInstance().getUAInfo(loginToken ?: ""))
+                .build()
+
             chain.proceed(request)
         }
     }

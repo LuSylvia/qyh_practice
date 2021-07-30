@@ -1,6 +1,8 @@
 package com.qyh_practice.module_recommend.paging
 
 
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.example.module_common.retrofit.RetrofitManager
 import com.qyh_practice.module_recommend.api.RecommendService
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
@@ -8,7 +10,19 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
 //TODO:继承PagingSource<K,V>
-class RecommendUserPagingSource {
+class RecommendUserPagingSource:PagingSource<String,List<RecommendUserInfo>>() {
+    override fun getRefreshKey(state: PagingState<String, List<RecommendUserInfo>>): String? {
+        TODO("Not yet implemented")
+        try{
+
+        }catch (e:Exception){
+            println(e.message)
+        }
+    }
+
+    override suspend fun load(params: LoadParams<String>): LoadResult<String, List<RecommendUserInfo>> {
+        TODO("Not yet implemented")
+    }
 
 
 //    override fun getRefreshKey(state: PagingState<Int, RecommendUserInfo>): Int? =null
