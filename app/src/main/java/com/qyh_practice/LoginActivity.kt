@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.module_common.BaseActivity
 import com.example.module_common.entity.LoadState
+import com.example.module_common.utils.LogUtil
 import com.qyh_practice.databinding.ActivityLoginBinding
 import com.qyh_practice.module_login.viewmodel.LoginViewModel
 import java.util.regex.Pattern
@@ -47,20 +47,20 @@ class LoginActivity : BaseActivity() {
             when(it){
                 LoadState.LOADING->{
                     //啥都不做
-                    Log.d("LoginActivity","在loading")
+                    LogUtil.d("LoginActivity", "在loading")
                 }
                 LoadState.SUCCESS->{
-                    Log.d("LoginActivity","登录成功")
+                    LogUtil.d("LoginActivity", "登录成功")
                     //跳转主界面
                     val intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
                 }
                 LoadState.FAIL->{
                     //打印错误信息
-                    Log.d("LoginActivity","登录失败")
+                    LogUtil.d("LoginActivity", "登录失败")
                 }
                 else -> {
-                    Log.d("LoginActivity","未知的错误（虽然也不太可能）")
+                    LogUtil.d("LoginActivity", "未知的错误（虽然也不太可能）")
                 }
             }
 
@@ -123,7 +123,6 @@ class LoginActivity : BaseActivity() {
                 if (phone.length == 11) {
                     //调viewModel，发验证码
                     try {
-                        //loginViewModel.getSmsCode(phone, 1)
                         timer.start()
                         waitCountDown=true
                         binding.btnGetDentifyingcode.isEnabled = false
@@ -147,12 +146,18 @@ class LoginActivity : BaseActivity() {
                 val phone: String = binding.edPhone.text.toString()
                 val code: String = binding.edDentifyingcode.text.toString()
 
-                if (phone.length != 11||code.length!=4) {
+                if (phone.length != 11 || code.length != 4) {
                     return@setOnClickListener
                 }
+                //TODO:自定义广播测试
+                val intent = Intent("com.example.broadcasttest.MyBroadcast")
+                intent.setPackage(packageName)
+                //sendBroadcast(intent)
+                sendOrderedBroadcast(intent, null)
+
                 //调用登录函数，获取错误信息
                 //成功后，它会自动调用getConfig函数
-                loginViewModel.login(phone,code,"")
+                loginViewModel.login(phone, code, "")
 
 
 
@@ -175,7 +180,6 @@ class LoginActivity : BaseActivity() {
 
 
     //与edPhone相关的修改
-
     @SuppressLint("ResourceAsColor")
     private fun edPhoneRelatedChange(numLen: Int) {
         if (numLen < 11) {
@@ -194,7 +198,6 @@ class LoginActivity : BaseActivity() {
 
         }
     }
-
 
     //验证手机号格式
     private fun checkMobiles(mobiles: String): Boolean {

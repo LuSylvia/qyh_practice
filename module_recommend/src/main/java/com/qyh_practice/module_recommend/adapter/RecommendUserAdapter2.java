@@ -17,14 +17,21 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendUserAdapter2  extends RecyclerView.Adapter<RecommendUserAdapter2.RecommendUserViewHolder> {
-    private List<RecommendUserInfo> userInfos=new ArrayList<>();
+public class RecommendUserAdapter2 extends RecyclerView.Adapter<RecommendUserAdapter2.RecommendUserViewHolder> {
+    private List<RecommendUserInfo> userInfos = new ArrayList<>();
+
+    public RecommendUserAdapter2() {
+    }
+
+    public RecommendUserAdapter2(List<RecommendUserInfo> userInfos) {
+        this.userInfos = userInfos;
+    }
 
     @NonNull
     @NotNull
     @Override
     public RecommendUserViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        RecommendUserViewHolder holder= new RecommendUserViewHolder(LayoutInflater.from(parent.getContext()).
+        RecommendUserViewHolder holder = new RecommendUserViewHolder(LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.item_recommend_userinfo, parent, false));
         return holder;
     }

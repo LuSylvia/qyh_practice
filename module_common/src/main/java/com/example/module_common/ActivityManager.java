@@ -64,7 +64,7 @@ public class ActivityManager {
         return activityStack.elementAt(activityStack.size() - 2);
     }
 
-    public void closeAllActivity() {
+    public void removeAllActivity() {
         if (activityStack == null) {
             return;
         }

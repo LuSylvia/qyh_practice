@@ -25,3 +25,9 @@ v0.07 添加了RequestInterceptor及相关类，已经能够获取ua信息
 推荐页item的布局,adapter已经实现
 
 后续会用Paing3完成分页加载，更新推荐页
+
+v0.071 实现了权限申请工具类PermissionX,日志工具类LogUtil,通知工具类NotificationUtil
+
+实现了强制下线功能（主要是为了熟练广播用法），权限申请，弹出系统通知
+
+正在参考《第一行代码》修改系统架构，目前难点在于ViewModel的重构

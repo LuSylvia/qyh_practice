@@ -2,13 +2,15 @@ package com.qyh_practice
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.module_common.BaseActivity
+import com.example.module_common.permission.PermissionX
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qyh_practice.adapter.ViewPagerAdapter
 import com.qyh_practice.databinding.ActivityMainBinding
-import com.qyh_practice.live.blindDateFragment
+import com.qyh_practice.live.LiveFragment
 import com.qyh_practice.message.messageFragment
 import com.qyh_practice.mine.myFragment
 import com.qyh_practice.moment.trendFragment
@@ -42,15 +44,30 @@ class MainActivity : BaseActivity() {
 
         initViewPager()
         setListener()
+        getPermissions()
 
     }
 
+    //请求权限
+    private fun getPermissions() {
+        PermissionX.request(
+            this,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.CAMERA
+        ) { allGranted, deniedList ->
+            if (allGranted) {
+                Toast.makeText(this, "All permissions are granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "You denied $deniedList", Toast.LENGTH_SHORT).show()
+            }
 
+        }
+    }
 
     //ViewPager初始化
     private fun initViewPager() {
         val recommendationFragment = RecommendationFragment()
-        val blindDateFragment = blindDateFragment()
+        val blindDateFragment = LiveFragment()
         val trendFragment = trendFragment()
         val messageFragment = messageFragment()
         val myFragment = myFragment()

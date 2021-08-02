@@ -38,6 +38,8 @@ object RetrofitManager {
         return retrofit.create(service)
     }
 
+    inline fun <reified T> getService(): T = getService(T::class.java)
+
     /**
      * 设置okhttpclient，包括超时设置，日志拦截器
      */

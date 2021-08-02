@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.qyh_practice.R
 
 
-class blindDateFragment : Fragment() {
+class LiveFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class blindDateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blind_date, container, false)
+        return inflater.inflate(R.layout.fragment_live, container, false)
     }
 
 }

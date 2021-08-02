@@ -16,7 +16,7 @@
         android:label="recommendationFragment" />
     <fragment
         android:id="@+id/blindDateFragment"
-        android:name="com.qyh_practice.live.blindDateFragment"
+        android:name="com.qyh_practice.live.LiveFragment"
         android:label="blindDateFragment" />
     <fragment
         android:id="@+id/trendFragment"

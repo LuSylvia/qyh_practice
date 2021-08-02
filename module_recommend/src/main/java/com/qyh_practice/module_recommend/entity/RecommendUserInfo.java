@@ -56,10 +56,33 @@ public class RecommendUserInfo {
 
     public List<MediaList> mediaList;
 
+    public RecommendUserInfo() {
+    }
+
+    public RecommendUserInfo(int age, String avatar, int gender, String desc, int liveType, boolean isVIP, boolean isRealName, String nickName, boolean hasRelation, int userId, String workCityStr, int onlineType, boolean isMatchMaker, int anchorid, boolean defaultAvatar, boolean isNewUser, List<MediaList> mediaList) {
+        this.age = age;
+        this.avatar = avatar;
+        this.gender = gender;
+        this.desc = desc;
+        this.liveType = liveType;
+        this.isVIP = isVIP;
+        this.isRealName = isRealName;
+        this.nickName = nickName;
+        this.hasRelation = hasRelation;
+        this.userId = userId;
+        this.workCityStr = workCityStr;
+        this.onlineType = onlineType;
+        this.isMatchMaker = isMatchMaker;
+        this.anchorid = anchorid;
+        this.defaultAvatar = defaultAvatar;
+        this.isNewUser = isNewUser;
+        this.mediaList = mediaList;
+    }
+
     /**
      * 3张媒体资源
      */
-    private static class MediaList{
+    static class MediaList {
         /**
          * 媒体类型。0相册图片，1动态图片，2动态视频
          */

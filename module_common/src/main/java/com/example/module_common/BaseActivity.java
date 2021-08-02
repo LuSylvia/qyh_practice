@@ -1,6 +1,7 @@
 package com.example.module_common;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.module_common.broadcast.ForceOfflineReceiver;
 import com.trello.rxlifecycle3.LifecycleProvider;
 
 import java.io.IOException;
@@ -28,6 +30,9 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
     private boolean isShowState = true;
     //是否输出日志信息
     private boolean isDebug;
+
+    //强制下线的广播接收器
+    private ForceOfflineReceiver receiver;
 
 
     /**
@@ -85,6 +90,23 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
         if (null != getToolbar() && isShowBacking()) {
             showBack();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.qyh_practice.broadcast.FORCE_OFFLINE");
+        receiver = new ForceOfflineReceiver();
+        registerReceiver(receiver, intentFilter);
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     private void showBack() {
