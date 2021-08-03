@@ -34,8 +34,8 @@ class LoginViewModel : BaseViewModel() {
 
                 RetrofitManager.setToken(loginResponse.data.temporaryToken)
                 val appConfigMsg = async { loginService.getAppConfig().errorMessage }.await()
-                LogUtil.d("LoginViewModel-msg", "配置异常,提示是${appConfigMsg}")
-                LogUtil.d("LoginViewModel-msg", "Token是${loginResponse.data.temporaryToken}")
+                LogUtil.d("LoginViewModel-msg", "配置异常,提示是：${appConfigMsg}")
+                LogUtil.d("LoginViewModel-msg", "Token是：${loginResponse.data.temporaryToken}")
 
                 loadState.value = LoadState.SUCCESS
 
@@ -50,16 +50,7 @@ class LoginViewModel : BaseViewModel() {
     }
 
 
-    //private val configLiveData=MutableLiveData<AppConfigEntity>()
 
-//    val workcityLiveData=Transformations.switchMap(configLiveData){
-//        LoginRepository.login()
-//
-//    }
-//    fun login2(phone: String, code:String,stageToken: String){
-//        val result=LoginRepository.login(phone, code, stageToken)
-//
-//    }
 
 }
 

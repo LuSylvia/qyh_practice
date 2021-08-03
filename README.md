@@ -31,3 +31,9 @@ v0.071 实现了权限申请工具类PermissionX,日志工具类LogUtil,通知�
 实现了强制下线功能（主要是为了熟练广播用法），权限申请，弹出系统通知
 
 正在参考《第一行代码》修改系统架构，目前难点在于ViewModel的重构
+
+v0.075 参考goole Paging3基本实现了推荐页的分页加载，可行性得先等appConfig问题修复完成才能测试
+
+分页加载目前还有2个问题亟需解决：（1）用于获取用户Ids的workcity：Int的数据来源->文件？SharedPreferences?数据库？内存？
+
+（2）RecommendUserRepository.kt里，在调用getPagingData前，必须让getIds函数跑完获取结果，目前的写法无法实现此效果

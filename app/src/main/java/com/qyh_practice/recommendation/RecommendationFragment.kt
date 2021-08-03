@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.qyh_practice.databinding.FragmentRecommendationBinding
+import com.qyh_practice.module_recommend.adapter.RecommendUserAdapter
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
 import com.qyh_practice.module_recommend.viewModel.RecommendViewModel
+import kotlinx.coroutines.flow.collect
 
 
 class RecommendationFragment : Fragment() {
     private lateinit var binding: FragmentRecommendationBinding
-    val viewModel: RecommendViewModel by activityViewModels()
-    private val userInfos = ArrayList<RecommendUserInfo>()
+    private val viewModel: RecommendViewModel by activityViewModels()
+    private lateinit var adapter:RecommendUserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,32 +32,36 @@ class RecommendationFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //TODO:将appBarConfig里的workcity传过来
-        val workcity: Int = 0
-        viewModel.getRecommendSids(workcity)
-        //initUserinfos()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        adapter= context?.let { RecommendUserAdapter(it) }!!
+        binding.recyclerView.layoutManager=LinearLayoutManager(activity)
+        binding.recyclerView.adapter=adapter
 
-//        val layoutManager=LinearLayoutManager(activity)
-//        binding.recyclerView.layoutManager=layoutManager
-//        val adapter=RecommendUserAdapter2(userInfos)
-//        binding.recyclerView.adapter=adapter
+        //TODO:获取workcity，从SharedPrefences拿
+        val workcity:Int=10101000
 
-    }
 
-    private fun initUserinfos() {
-        val mediaList = RecommendUserInfo().mediaList
-
-        //mediaList.add()
-        repeat(2) {
-            userInfos.add(
-                RecommendUserInfo(
-                    18, "123", 1, "123", 1, false, true, "just", false, 123, "ShenZhen", 0,
-                    false, 1, false, true, mediaList
-                )
-            )
+        lifecycleScope.launchWhenCreated {
+            viewModel.getPagingData(workcity).collect { pagingData->
+                adapter.submitData(pagingData)
+            }
         }
+        adapter.addLoadStateListener {
+            when(it.refresh){
+                is LoadState.NotLoading->{
+
+                }
+                is LoadState.Loading->{
+
+                }
+                is LoadState.Error->{
+
+                }
+            }
+        }
+
+
     }
 
 

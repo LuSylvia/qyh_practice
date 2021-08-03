@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">module_common</string>
     <string name="string_common_net_error">暂无网络，不如刷新试试？</string>
+    <string name="string_empty">暂无用户数据，下拉刷新试试？</string>
 </resources>

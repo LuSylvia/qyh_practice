@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
 
     <TextView
         android:id="@+id/tv_phone"
@@ -142,7 +142,7 @@
         app:layout_constraintVertical_bias="0.77" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_empty"
         android:layout_width="0dp"
         android:layout_height="69dp"
         app:layout_constraintEnd_toEndOf="parent"

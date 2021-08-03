@@ -2,15 +2,21 @@ package com.qyh_practice.module_recommend.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import com.example.module_common.BaseViewModel
 import com.example.module_common.entity.LoadState
 import com.example.module_common.retrofit.RetrofitManager
 import com.example.module_common.retrofit.launch
 import com.qyh_practice.module_recommend.api.RecommendService
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
+import com.qyh_practice.module_recommend.repository.RecommendUserRepository
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
 
 class RecommendViewModel:BaseViewModel() {
+    /**
+     * 获取推荐用户数据 1.0版
+     */
     val loadState = MutableLiveData<LoadState>()
 
     val recommendPeopleLiveData=MutableLiveData<ArrayList<RecommendUserInfo>>()
@@ -24,12 +30,12 @@ class RecommendViewModel:BaseViewModel() {
             if(("").equals(errorMsg)){
                 //获取列表成功
                 //判断列表数据是否为空
-                if(response.await().data.list.isEmpty()){
+                if(response.await().data.userInfoList?.isEmpty() == true){
                     loadState.value=LoadState.EMPTY
                 }else{
                     loadState.value=LoadState.SUCCESS
                     //给LiveData填充数据
-                    recommendPeopleLiveData.value= response.await().data.list as ArrayList<RecommendUserInfo>?
+                    recommendPeopleLiveData.value= response.await().data.userInfoList as ArrayList<RecommendUserInfo>?
                 }
 
             }else{
@@ -69,5 +75,15 @@ class RecommendViewModel:BaseViewModel() {
 
 
     }
+
+    /**
+     * 获取推荐用户数据 2.0版
+     */
+    suspend fun getPagingData(workcity:Int):Flow<PagingData<RecommendUserInfo>>{
+        return RecommendUserRepository.instance.getPagingData(workcity=workcity)
+    }
+
+
+
 
 }

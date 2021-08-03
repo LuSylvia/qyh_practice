@@ -76,6 +76,8 @@ dependencies {
     api rootProject.ext.paging3.paging_common
     api rootProject.ext.paging3.paging_compose
 
+    api rootProject.ext.dependencies.glide
+
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(path: ':module_common')
 

@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
         init()
-        loginViewModel.loadState.observe(this, Observer {
+        loginViewModel.loadState.observe(this, {
             when(it){
                 LoadState.LOADING->{
                     //啥都不做

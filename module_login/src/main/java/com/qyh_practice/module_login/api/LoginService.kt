@@ -22,7 +22,7 @@ interface LoginService {
      */
     @FormUrlEncoded
     @POST(LoginUrl.USER_LOGIN)
-    fun mobileLogin(
+    suspend fun mobileLogin(
         @Field("mobile") phone: String,
         @Field("code") code: String,
         @Field("stageToken") stageToken: String
@@ -38,7 +38,7 @@ interface LoginService {
     ): Call<ResponseEntity<LoginEntity>>
 
     @GET(LoginUrl.GET_APP_CONFIG)
-    fun getAppConfig(): ResponseEntity<AppConfigEntity>;
+    suspend fun getAppConfig(): ResponseEntity<AppConfigEntity>;
 
 
     @GET(LoginUrl.GET_APP_CONFIG)
