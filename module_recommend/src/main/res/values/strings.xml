@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">module_recommend</string>
+    <string name="live_public_4">视频相亲</string>
+    <string name="live_private_4">专属相亲</string>
+    <string name="live_group_4">多人交友</string>
 </resources>

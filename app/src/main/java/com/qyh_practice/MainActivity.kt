@@ -2,6 +2,7 @@ package com.qyh_practice
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -14,7 +15,7 @@ import com.qyh_practice.live.LiveFragment
 import com.qyh_practice.message.messageFragment
 import com.qyh_practice.mine.myFragment
 import com.qyh_practice.moment.trendFragment
-import com.qyh_practice.recommendation.RecommendationFragment
+import com.qyh_practice.recommend.RecommendFragment
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -37,10 +38,16 @@ class MainActivity : BaseActivity() {
         findView()
         if (tv_main_title != null) {
             tv_main_title.setText("仿趣约会")
-
         }
-        toolbar.setLogo(R.drawable.ic_dashboard_black_24dp)
+        binding.baseToolbar.visibility=View.GONE
+
+
+
+        //toolbar.setLogo(R.drawable.ic_dashboard_black_24dp)
         //tv_sub_title.setText("more")
+
+
+
 
         initViewPager()
         setListener()
@@ -66,7 +73,7 @@ class MainActivity : BaseActivity() {
 
     //ViewPager初始化
     private fun initViewPager() {
-        val recommendationFragment = RecommendationFragment()
+        val recommendationFragment = RecommendFragment()
         val blindDateFragment = LiveFragment()
         val trendFragment = trendFragment()
         val messageFragment = messageFragment()

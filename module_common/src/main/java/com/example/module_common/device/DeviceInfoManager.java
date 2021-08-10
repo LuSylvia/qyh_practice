@@ -283,7 +283,7 @@ public class DeviceInfoManager {
                 .append(randomUUID).append(SEPARATOR)
                 .append(getNetworkType()).append(SEPARATOR)
                 .append(getDeviceId(isAddIMEI)).append(SEPARATOR)
-                .append(getCheckCode(randomUUID, key)).append(SEPARATOR)//TODO:此函数因
+                .append(getCheckCode(randomUUID, key)).append(SEPARATOR)//TODO:
                 .append(getADId(isAddIMEI));
         return sb.toString();
     }

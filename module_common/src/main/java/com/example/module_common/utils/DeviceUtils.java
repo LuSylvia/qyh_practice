@@ -41,6 +41,7 @@ public class DeviceUtils {
 
     }
 
+    //TODO:因API30安全策略变更，导致无法使用传统方式获取IEMI，此函数可能需要变更
     public static String getIMEI(Context context) {
         try {
 //            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

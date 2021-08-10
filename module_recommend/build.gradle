@@ -59,7 +59,7 @@ dependencies {
 
     api rootProject.ext.dependencies["okHttp3"]
     api rootProject.ext.dependencies["okHttp3LoggingInterceptor"]
-    api rootProject.ext.dependencies["okHttp3Integration"]
+
 
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["retrofitConvertGson"]

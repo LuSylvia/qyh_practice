@@ -14,6 +14,12 @@ object RetrofitManager {
 
     private var loginToken: String? = null
     private val retrofit: Retrofit
+    private var mCookieMap = HashMap<String, MutableList<Cookie>>()
+    private val headers = mapOf(
+        "Accept-Charset" to "UTF-8,*;q=0.5",
+        "Cache-Control" to "no-cache",
+        "Connection" to "Keep-Alive"
+    )
 
     init {
         val gson = Gson().newBuilder()
@@ -29,7 +35,7 @@ object RetrofitManager {
 
     }
 
-    public fun setToken(token: String) {
+     fun setToken(token: String) {
         this.loginToken = token
     }
 
@@ -65,29 +71,27 @@ object RetrofitManager {
         return okHttpClient
     }
 
-    private var mCookieMap = HashMap<String, MutableList<Cookie>>()
 
-    private fun getDomain(url: HttpUrl):String {
+
+    private fun getDomain(url: HttpUrl): String {
         return url.topPrivateDomain() ?: url.host() ?: ""
     }
 
-
+    /**
+     * 拦截器初始化
+     */
     private fun initRequestIntercepetor(): Interceptor {
         return Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()
-            //更新此处的value为DeviceInfoManager.getUAInfo(String key)
-            //1.先从本地读取缓存
-//            val request = if (loginToken == null || loginToken.equals("")) {
-//                requestBuilder.build()
-//            } else {
-//                requestBuilder.addHeader("ua", DeviceInfoManager.getInstance().getUAInfo(loginToken))
-//                    .build()
-//            }
+            //添加头部
+            for ((header, value) in headers) {
+                requestBuilder.addHeader(header, value)
+            }
 
             val request = requestBuilder
-                .addHeader("Accept-Charset", "UTF-8,*;q=0.5")
-                .addHeader("Cache-Control", "no-cache")
-                .addHeader("Connection", "Keep-Alive")
+//                .addHeader("Accept-Charset", "UTF-8,*;q=0.5")
+//                .addHeader("Cache-Control", "no-cache")
+//                .addHeader("Connection", "Keep-Alive")
                 .addHeader("ua", DeviceInfoManager.getInstance().getUAInfo(loginToken ?: ""))
                 .build()
 

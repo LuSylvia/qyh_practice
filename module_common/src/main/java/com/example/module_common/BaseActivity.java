@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public abstract class BaseActivity extends MyRxAppCompatActivity implements BaseView {
     private static final String TAG = BaseActivity.class.getSimpleName();
-    private TextView tv_main_title, tv_sub_title;
+    public TextView tv_main_title, tv_sub_title;
     private Toolbar toolbar;
 
     //是否显示标题栏，默认为true

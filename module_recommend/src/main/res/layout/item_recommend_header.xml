@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_video"
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="68dp"
+
+        android:background="@drawable/bg_live"
+        app:layout_constraintRight_toLeftOf="@id/tv_zhuanshu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_zhuanshu"
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+        android:layout_marginEnd="144dp"
+
+        android:background="@drawable/bg_live"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_video"
+
+        app:layout_constraintTop_toTopOf="@+id/tv_video" />
+
+    <TextView
+        android:id="@+id/tv_group_chat"
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+
+
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_live"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_zhuanshu"
+        app:layout_constraintTop_toTopOf="@+id/tv_video" />
+
+    <ImageView
+        android:id="@+id/iv_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_19dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_video"
+        app:layout_constraintTop_toTopOf="@+id/tv_video"
+        app:srcCompat="@drawable/icon_live"
+
+        />
+
+    <ImageView
+        android:id="@+id/iv_zhuanshu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_19dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_zhuanshu"
+        app:layout_constraintTop_toTopOf="@+id/tv_zhuanshu"
+        app:srcCompat="@drawable/icon_exclusive"
+
+        />
+
+    <ImageView
+        android:id="@+id/iv_group_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_19dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_group_chat"
+        app:layout_constraintTop_toTopOf="@+id/tv_group_chat"
+        app:srcCompat="@drawable/icon_manypeople"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_video_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_17dp"
+        android:text="@string/live_public_4"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_video"
+        app:layout_constraintTop_toBottomOf="@+id/iv_video"
+
+        />
+    <TextView
+        android:id="@+id/tv_zhuanshu_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_17dp"
+        android:text="@string/live_public_4"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_zhuanshu"
+        app:layout_constraintTop_toBottomOf="@+id/iv_zhuanshu"
+
+        />
+    <TextView
+        android:id="@+id/tv_group_chat_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_17dp"
+        android:text="@string/live_public_4"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_group_chat"
+        app:layout_constraintTop_toBottomOf="@+id/iv_group_chat"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

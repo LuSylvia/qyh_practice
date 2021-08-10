@@ -9,18 +9,30 @@ import com.example.module_common.retrofit.RetrofitManager
 import com.example.module_common.retrofit.launch
 import com.qyh_practice.module_recommend.api.RecommendService
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
+import com.qyh_practice.module_recommend.entity.TestUserEntity
 import com.qyh_practice.module_recommend.repository.RecommendUserRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 
 class RecommendViewModel:BaseViewModel() {
-    /**
-     * 获取推荐用户数据 1.0版
-     */
+
     val loadState = MutableLiveData<LoadState>()
 
     val recommendPeopleLiveData=MutableLiveData<ArrayList<RecommendUserInfo>>()
 
+    val testUserLiveData=MutableLiveData<ArrayList<TestUserEntity>>()
+
+    /**
+     * 模拟获取数据
+     */
+    fun getTestUserInfos(workcity: Int){
+
+    }
+
+
+    /**
+     * 获取推荐用户数据 1.0版
+     */
     fun getRecommendList(sids:String){
         launch({
             loadState.value=LoadState.LOADING
