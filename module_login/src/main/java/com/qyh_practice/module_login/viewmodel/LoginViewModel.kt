@@ -14,6 +14,7 @@ class LoginViewModel : BaseViewModel() {
 
     val loadState = MutableLiveData<LoadState>()
 
+    private val mService by lazy { RetrofitManager.getService(LoginService::class.java) }
 
     /**
      * 登录
@@ -22,23 +23,21 @@ class LoginViewModel : BaseViewModel() {
     fun login(phone: String, code:String,stageToken: String) {
         launch({
             loadState.value=LoadState.LOADING
-            val loginService: LoginService = RetrofitManager.getService(LoginService::class.java)
 
-            val loginResponse = async { loginService.mobileLogin(phone, code, stageToken) }.await()
+            val loginResponse=(async {
+                mService.mobileLogin(phone,code, stageToken)
+            }).await()
+            //等登录接口的返回值
+            if(loginResponse.isError){
+                //mobileLogin出错
+                Log.d("LoginViewModel","登录失败，提示是${loginResponse.errorMessage}")
+                loadState.value=LoadState.FAIL
+            }else{
+                //mobileLogin成功
+                Log.d("LoginViewModel","登录成功，userId是${loginResponse.data.userId}")
 
-            if (loginResponse.isError) {
-                //出错
-                LogUtil.d("LoginViewModel-login", "登录失败，提示是${loginResponse.errorMessage}")
-                loadState.value = LoadState.FAIL
-            } else {
-
-                RetrofitManager.setToken(loginResponse.data.temporaryToken)
-                val appConfigMsg = async { loginService.getAppConfig().errorMessage }.await()
-                LogUtil.d("LoginViewModel-msg", "配置异常,提示是：${appConfigMsg}")
-                LogUtil.d("LoginViewModel-msg", "Token是：${loginResponse.data.temporaryToken}")
-
-                loadState.value = LoadState.SUCCESS
-
+//                RetrofitManager.setToken(loginResponse.await().data.temporaryToken)
+                getAppConfig()
             }
 
         },{
@@ -49,8 +48,41 @@ class LoginViewModel : BaseViewModel() {
 
     }
 
+    /**
+     * 获取系统配置信息
+     */
+    fun getAppConfig():AppConfigEntity?{
+        var appConfig:AppConfigEntity?=null
+        viewModelScope.launch {
+            try {
+                val responseBody=mService.getAppConfig()
+
+                 if (responseBody.isError) {
+                     //请求失败，打印错误信息
+                    Log.d("LoginViewModel_config", responseBody.errorMessage)
+                } else {
+                    //请求成功，返回配置信息
+                    appConfig = responseBody.data
+                }
+
+            }catch (e:Exception){
+                Log.d("LoginViewModel_config","异常是"+e.message)
+            }
+        }
+        return appConfig
+    }
 
 
+    /**
+     * 获取验证码
+     * 该函数不需要处理返回值
+     */
+    fun getSmsCode(phone: String, type: Int) {
+        viewModelScope.launch {
+            val loginService = RetrofitManager.getService(LoginService::class.java)
+            loginService.getSmsCode(phone, type)
+        }
+    }
 
 }
 
