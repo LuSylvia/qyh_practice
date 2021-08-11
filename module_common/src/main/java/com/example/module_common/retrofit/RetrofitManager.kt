@@ -3,6 +3,8 @@ package com.example.module_common.retrofit
 import android.util.Log
 import com.example.module_common.constants.BaseUrl
 import com.example.module_common.device.DeviceInfoManager
+import com.example.module_common.utils.CookieHelper
+import com.example.module_common.utils.LogUtil
 import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,15 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitManager {
-
     private var loginToken: String? = null
     private val retrofit: Retrofit
-    private var mCookieMap = HashMap<String, MutableList<Cookie>>()
-    private val headers = mapOf(
-        "Accept-Charset" to "UTF-8,*;q=0.5",
-        "Cache-Control" to "no-cache",
-        "Connection" to "Keep-Alive"
-    )
 
     init {
         val gson = Gson().newBuilder()
@@ -35,7 +30,7 @@ object RetrofitManager {
 
     }
 
-     fun setToken(token: String) {
+    public fun setToken(token: String) {
         this.loginToken = token
     }
 
@@ -59,11 +54,17 @@ object RetrofitManager {
                 override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
                     if (!cookies.isNullOrEmpty()) {
                         mCookieMap[getDomain(url)] = cookies
+                        CookieHelper.getInstance().saveCookies(url, cookies)
                     }
                 }
 
                 override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
-                    return mCookieMap[getDomain(url)] ?: arrayListOf()
+                    val cookies = mCookieMap[getDomain(url)] ?: arrayListOf()
+                    val myCookies = CookieHelper.getInstance().loadCookieByUrl(url)
+//                    if (cookies.equals(myCookies)) {
+//                        Log.d("Retrofit", "cookies都相等")
+//                    }
+                    return myCookies
                 }
             })
             .build()
@@ -71,27 +72,20 @@ object RetrofitManager {
         return okHttpClient
     }
 
-
+    private var mCookieMap = HashMap<String, MutableList<Cookie>>()
 
     private fun getDomain(url: HttpUrl): String {
         return url.topPrivateDomain() ?: url.host() ?: ""
     }
 
-    /**
-     * 拦截器初始化
-     */
+
     private fun initRequestIntercepetor(): Interceptor {
         return Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()
-            //添加头部
-            for ((header, value) in headers) {
-                requestBuilder.addHeader(header, value)
-            }
-
             val request = requestBuilder
-//                .addHeader("Accept-Charset", "UTF-8,*;q=0.5")
-//                .addHeader("Cache-Control", "no-cache")
-//                .addHeader("Connection", "Keep-Alive")
+                .addHeader("Accept-Charset", "UTF-8,*;q=0.5")
+                .addHeader("Cache-Control", "no-cache")
+                .addHeader("Connection", "Keep-Alive")
                 .addHeader("ua", DeviceInfoManager.getInstance().getUAInfo(loginToken ?: ""))
                 .build()
 

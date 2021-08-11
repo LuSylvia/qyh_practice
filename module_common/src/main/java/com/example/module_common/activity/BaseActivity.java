@@ -1,4 +1,4 @@
-package com.example.module_common;
+package com.example.module_common.activity;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -10,8 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.module_common.BaseView;
+import com.example.module_common.R;
 import com.example.module_common.broadcast.ForceOfflineReceiver;
 import com.trello.rxlifecycle3.LifecycleProvider;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
@@ -71,15 +76,7 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
             //getTitle得到的值是activity:label的属性
             tv_main_title.setText(getTitle());
         }
-        Interceptor interceptor=new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request=chain.request().newBuilder()
-                        .header("headname","value")
-                        .build();
-                return null;
-            }
-        };
+        ARouter.getInstance().inject(this);
 
     }
 
@@ -90,6 +87,8 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
         if (null != getToolbar() && isShowBacking()) {
             showBack();
         }
+        //EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -107,6 +106,12 @@ public abstract class BaseActivity extends MyRxAppCompatActivity implements Base
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //EventBus.getDefault().unregister(this);
     }
 
     private void showBack() {

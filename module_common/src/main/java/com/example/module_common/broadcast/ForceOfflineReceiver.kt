@@ -4,7 +4,7 @@ package com.example.module_common.broadcast
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import com.example.module_common.ActivityManager
+import com.example.module_common.activity.ActivityManager
 
 class ForceOfflineReceiver : BaseBroadcastReceiver() {
     //Exported表示是否允许该Receiver接受本程序以外的广播

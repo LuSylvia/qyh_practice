@@ -47,7 +47,7 @@ class TestUserAdapter(val context: Context, val testUserList: List<TestUserEntit
     }
 
     override fun getItemCount(): Int {
-        if (testUserList == null || testUserList.isEmpty()) {
+        if (testUserList.isEmpty()) {
             return 0
         }
         return testUserList.size

@@ -1,6 +1,6 @@
 package com.example.module_common.permission
 
-import com.example.module_common.BaseActivity
+import com.example.module_common.activity.BaseActivity
 
 object PermissionX {
     private const val TAG = "InvisibleFragment"

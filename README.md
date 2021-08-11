@@ -34,6 +34,10 @@ v0.071 实现了权限申请工具类PermissionX,日志工具类LogUtil,通知�
 
 v0.075 参考goole Paging3基本实现了推荐页的分页加载，可行性得先等appConfig问题修复完成才能测试
 
-分页加载目前还有2个问题亟需解决：（1）用于获取用户Ids的workcity：Int的数据来源->文件？SharedPreferences?数据库？内存？
+v0.09 解决了appBarconfig问题——该问题实际是未完成注册的用户才会出现，即单纯调用login.do接口并不会实际完整的注册一个用户，而只会核实该账号是否存在
 
-（2）RecommendUserRepository.kt里，在调用getPagingData前，必须让getIds函数跑完获取结果，目前的写法无法实现此效果
+通过cookieHelper实现了cookie的本地持久化，进而实现了自动登录
+
+导入了ARouter和EventBus,已经成功实现页面路由跳转和事件发送，后续可能会添加ARouter的拦截器
+
+进一步美化推荐页的UI，目前的难点是实现headerview的背景透明化

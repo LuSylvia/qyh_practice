@@ -37,6 +37,7 @@ interface LoginService {
         @Field("stageToken") stageToken: String
     ): Call<ResponseEntity<LoginEntity>>
 
+
     @GET(LoginUrl.GET_APP_CONFIG)
     suspend fun getAppConfig(): ResponseEntity<AppConfigEntity>;
 
@@ -44,16 +45,5 @@ interface LoginService {
     @GET(LoginUrl.GET_APP_CONFIG)
     fun getAppConfig2(): Call<ResponseEntity<AppConfigEntity>>;
 
-
-    /**
-     * @param phone 手机号
-     * @param type 1:登录，2：注册，3：绑定
-     * @return 目前不需要返回值，因为验证码直接发用户手机了
-     */
-    @GET(LoginUrl.GT_SMS_REQUEST)
-    fun getSmsCode(
-        @Field("mobile") phone: String,
-        @Field("type") type: Int
-    )
 
 }

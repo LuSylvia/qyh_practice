@@ -8,6 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Qyh_practice"></application>
+        android:theme="@style/Theme.Qyh_practice">
+        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".LoginActivity" />
+    </application>
 
 </manifest>

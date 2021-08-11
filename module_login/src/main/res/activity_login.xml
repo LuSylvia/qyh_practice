@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".module_login.LoginActivity">
 
 
     <include
@@ -54,7 +54,7 @@
         android:maxLength="11"
         android:hint="@string/string_login_hint"
         android:inputType="phone"
-        android:text="88842244422"
+        tools:text="88842244422"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toEndOf="@+id/tv_phone"
@@ -110,7 +110,7 @@
         android:layout_marginRight="20dp"
         android:inputType="number"
         android:layout_marginBottom="4dp"
-        android:text="1024"
+        tools:text="1024"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/tv_dentifyingcode"
         app:layout_constraintEnd_toStartOf="@+id/btn_get_dentifyingcode"

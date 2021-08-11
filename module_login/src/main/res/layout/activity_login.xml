@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/activity_base"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_headers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:gravity="center_horizontal"
+        android:text="@string/string_login_header_txt"
+        android:textColor="#333333"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/string_phone"
+        android:textSize="@dimen/text_18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_headers" />
+
+    <EditText
+        android:id="@+id/ed_phone"
+        android:layout_width="313dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:hint="@string/string_login_hint"
+        android:text="88842244451"
+        android:inputType="phone"
+        android:maxLength="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toEndOf="@+id/tv_phone"
+        app:layout_constraintTop_toTopOf="@+id/tv_phone"
+        tools:text="88842244451" />
+
+    <TextView
+        android:id="@+id/tv_dentifyingcode"
+        android:layout_width="80dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center"
+        android:text="@string/string_verifycode"
+        android:textSize="@dimen/text_18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+
+    <Button
+        android:id="@+id/btn_get_dentifyingcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/grey"
+        android:text="@string/string_get_dentifyingcode"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_dentifyingcode"
+        app:layout_constraintTop_toTopOf="@+id/tv_dentifyingcode" />
+
+
+    <TextView
+        android:id="@+id/tv_phone_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/string_phone_error"
+        android:visibility="invisible"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+
+    <com.example.module_common.ui.DentifyingCodeView
+        android:id="@+id/ed_dentifyingcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="4dp"
+        android:inputType="number"
+        android:text="1024"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_dentifyingcode"
+        app:layout_constraintEnd_toStartOf="@+id/btn_get_dentifyingcode"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toEndOf="@+id/tv_dentifyingcode"
+        app:layout_constraintTop_toTopOf="@+id/tv_dentifyingcode"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="1024" />
+
+    <TextView
+        android:id="@+id/tv_dentifyingcode_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="@string/string_verifycode_error"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dentifyingcode" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="92dp"
+        android:layout_height="83dp"
+        android:background="@drawable/arrow_right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77" />
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="0dp"
+        android:layout_height="69dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:srcCompat="@drawable/img_login_avatars" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

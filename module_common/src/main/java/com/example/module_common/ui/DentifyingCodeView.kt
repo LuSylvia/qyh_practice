@@ -99,9 +99,7 @@ class DentifyingCodeView @JvmOverloads constructor(
         typedArray.recycle()
 
         // force LTR because of bug: https://github.com/JustKiddingBaby/VercodeEditText/issues/4
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            layoutDirection = LAYOUT_DIRECTION_LTR
-        }
+        layoutDirection = LAYOUT_DIRECTION_LTR
     }
 
     private fun initPaint() {

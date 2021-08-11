@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
+apply plugin:'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -20,6 +21,12 @@ android {
 //        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg ("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -35,6 +42,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 
@@ -46,11 +56,22 @@ dependencies {
     api rootProject.ext.dependencies["kotlinCoroutines"]
     api rootProject.ext.dependencies["kotlinCoroutines_core"]
 
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
+    implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
+    implementation  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
+    implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'   //二级刷新头
+    implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲加载
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
+
     api rootProject.ext.ktx["appcompat"]
     api rootProject.ext.ktx["core"]
     api rootProject.ext.ktx["livedata"]
     api rootProject.ext.ktx["viewmodel"]
     api rootProject.ext.ktx["lifecycle"]
+    api rootProject.ext.ktx["activity"]
+    api rootProject.ext.ktx["fragment"]
 
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["constraintlayout"]
@@ -69,9 +90,6 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycleComponents"]
     api rootProject.ext.dependencies["rxBinding"]
 
-    api rootProject.ext.dependencies["arouter_api"]
-    api rootProject.ext.dependencies["arouter_compiler"]
-
     api rootProject.ext.paging3.paging_runtime
     api rootProject.ext.paging3.paging_common
     api rootProject.ext.paging3.paging_compose
@@ -79,9 +97,12 @@ dependencies {
     api rootProject.ext.dependencies.glide
 
     implementation 'com.android.support:multidex:1.0.3'
-    implementation project(path: ':module_common')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 
+    kapt rootProject.ext.dependencies["arouter_compiler"]
+
+    api project(path: ':module_common')
 
     testImplementation 'junit:junit:4.13.2'
 

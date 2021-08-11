@@ -4,4 +4,7 @@
     <dimen name="dimen_17dp">17dp</dimen>
     <dimen name="dimen_18dp">18dp</dimen>
     <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dimen_70">70dp</dimen>
 </resources>

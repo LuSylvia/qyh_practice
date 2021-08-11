@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.module_common.activity.ActivityManager;
+import com.tencent.mmkv.MMKV;
 
 import java.lang.ref.WeakReference;
 
@@ -21,7 +23,8 @@ public class BaseApplication extends Application {
     private boolean isBackground = false;
     protected static BaseApplication mInstance;
     private WeakReference<Activity> currentActivity;
-
+    //ARouter调试开关
+    private boolean isDebugARouter=true;
     public int getMainProcessPid() {
         return mainProcessPid;
     }
@@ -36,7 +39,15 @@ public class BaseApplication extends Application {
             mainProcessPid = android.os.Process.myPid();
 
             registerActivityLifecycle();
-
+            //MMKV初始化
+            String rootDir= MMKV.initialize(this);
+            if(isDebugARouter){
+                //打印日志
+                ARouter.openLog();
+                //开启调试模式（若在InstantRun模式下运行，必须开启）
+                //线上模式必须关闭
+                ARouter.openDebug();
+            }
 
             ARouter.init(this);//尽可能早，推荐在Application模块初始化
         }
@@ -44,6 +55,11 @@ public class BaseApplication extends Application {
         //activityList=new ArrayList<>();
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ARouter.getInstance().destroy();
+    }
 
     private void registerActivityLifecycle() {
         registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {

@@ -1,4 +1,4 @@
-package com.example.module_common;
+package com.example.module_common.activity;
 
 import android.os.Bundle;
 

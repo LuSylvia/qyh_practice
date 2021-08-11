@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+apply plugin:'kotlin-kapt'
+
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -19,6 +21,11 @@ android {
         versionName rootProject.ext.android["versionName"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg ("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -88,22 +95,30 @@ dependencies {
 
 
 
+    implementation 'com.tencent:mmkv-static:1.0.23'
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
     implementation 'com.android.support:multidex:1.0.3'
 
+    api rootProject.ext.dependencies["arouter_api"]
+    kapt rootProject.ext.dependencies["arouter_compiler"]
+
     implementation project(path: ':module_common')
     implementation project(path: ':module_login')
     implementation project(path: ':module_recommend')
-    implementation project(path: ':module_recommend')
+
+
+
 
 
     testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
 
 
 

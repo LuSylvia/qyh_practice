@@ -3,4 +3,6 @@
     <string name="live_public_4">视频相亲</string>
     <string name="live_private_4">专属相亲</string>
     <string name="live_group_4">多人交友</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,23 +1,29 @@
-package com.qyh_practice.recommend
+package com.qyh_practice.module_recommend
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.qyh_practice.R
-import com.qyh_practice.databinding.FragmentRecommendBinding
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.module_common.constants.RouterManager
+import com.example.module_common.eventbus.EventBusMessage
 import com.qyh_practice.module_recommend.adapter.TestUserAdapter
+import com.qyh_practice.module_recommend.databinding.FragmentRecommendBinding
 import com.qyh_practice.module_recommend.entity.TestUserEntity
 import com.qyh_practice.module_recommend.viewModel.RecommendViewModel
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
-
+@Route(path = RouterManager.FRAGMENT_RECOMMEND)
 class RecommendFragment : Fragment() {
-    private lateinit var binding: FragmentRecommendBinding
+    private lateinit var binding:FragmentRecommendBinding
     private val viewModel: RecommendViewModel by activityViewModels()
     private lateinit var adapter: TestUserAdapter
     private lateinit var testUserInfos: MutableList<TestUserEntity>
@@ -62,6 +68,31 @@ class RecommendFragment : Fragment() {
 
     }
 
+    /**
+     *
+     */
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+
+    /**
+     * 注意，要用eventbus接受消息的话，该方法必须是用public修饰
+     * 并且收到消息的前提是，必须先调用EventBus.getDefault().register方法
+     * 否则，应采用粘性事件，发送方选择postSticky方法，接受方设置sticky=true
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    fun onReceiveMsg(msg: EventBusMessage){
+        Log.d("Syliva-receive","收到的消息是${msg.userID}")
+        //TODO:接受workcity，然后开始检索
+    }
+
 
     @SuppressLint("ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -79,13 +110,7 @@ class RecommendFragment : Fragment() {
         )
         binding.recyclerView.addItemDecoration(itemDecoration)
 
-//        binding.recommendAppbarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
-//            {
-//                if (verticalOffset == 0) {
-//
-//                }
-//            }
-//        }
+
 
         //折叠栏属性设置
         binding.recommendCollapsingToolbarLayout.title = "仿趣约会"
@@ -95,14 +120,7 @@ class RecommendFragment : Fragment() {
         }
 
 
-        //TODO:获取到tv_main_title，隐藏标题栏
-
-
         //TODO:获取workcity，从SharedPrefences拿
         val workcity: Int = 10101000
-
-
     }
-
-
 }

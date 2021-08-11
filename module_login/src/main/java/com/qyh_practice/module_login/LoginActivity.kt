@@ -1,4 +1,4 @@
-package com.qyh_practice
+package com.qyh_practice.module_login
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,14 +8,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import com.example.module_common.BaseActivity
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.example.module_common.activity.BaseActivity
+import com.example.module_common.constants.RouterManager
 import com.example.module_common.entity.LoadState
+import com.example.module_common.utils.AccountManager
 import com.example.module_common.utils.LogUtil
-import com.qyh_practice.databinding.ActivityLoginBinding
+import com.qyh_practice.module_login.databinding.ActivityLoginBinding
 import com.qyh_practice.module_login.viewmodel.LoginViewModel
 import java.util.regex.Pattern
 
+@Route(path =RouterManager.ACTIVITY_LOGIN)
 class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
@@ -42,6 +46,7 @@ class LoginActivity : BaseActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         init()
         loginViewModel.loadState.observe(this, {
             when(it){
@@ -51,9 +56,10 @@ class LoginActivity : BaseActivity() {
                 }
                 LoadState.SUCCESS->{
                     LogUtil.d("LoginActivity", "登录成功")
-                    //跳转主界面
-                    val intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
+                    AccountManager.getInstance().saveAccount(binding.edPhone.text.toString())
+                    //TODO:用ARouter实现跳转主界面
+                    ARouter.getInstance().build(RouterManager.ACTIVITY_MAIN).navigation()
+
                 }
                 LoadState.FAIL->{
                     //打印错误信息
@@ -209,6 +215,8 @@ class LoginActivity : BaseActivity() {
             false
         }
     }
+
+
 
 
 }

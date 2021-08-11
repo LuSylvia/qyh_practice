@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_17dp"
-        android:text="@string/live_public_4"
+        android:text="@string/live_private_4"
         android:textSize="@dimen/text_14sp"
         app:layout_constraintLeft_toLeftOf="@+id/iv_zhuanshu"
         app:layout_constraintTop_toBottomOf="@+id/iv_zhuanshu"
@@ -103,10 +103,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_17dp"
-        android:text="@string/live_public_4"
+        android:text="@string/live_group_4"
         android:textSize="@dimen/text_14sp"
         app:layout_constraintLeft_toLeftOf="@+id/iv_group_chat"
         app:layout_constraintTop_toBottomOf="@+id/iv_group_chat"
-
         />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_recommend_head_arrow"
+        app:layout_constraintRight_toRightOf="@id/tv_video"
+        app:layout_constraintTop_toTopOf="@+id/tv_video_tips"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_video_tips"
+        android:layout_marginEnd="@dimen/dimen_18dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_recommend_head_arrow"
+        app:layout_constraintRight_toRightOf="@id/tv_zhuanshu"
+        app:layout_constraintTop_toTopOf="@+id/tv_zhuanshu_tips"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_zhuanshu_tips"
+        android:layout_marginEnd="@dimen/dimen_18dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_recommend_head_arrow"
+        app:layout_constraintRight_toRightOf="@id/tv_group_chat"
+        app:layout_constraintTop_toTopOf="@+id/tv_group_chat_tips"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_group_chat_tips"
+        android:layout_marginEnd="@dimen/dimen_18dp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,17 @@
 package com.qyh_practice
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.example.module_common.BaseActivity
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.module_common.activity.ActivityManager
+import com.example.module_common.activity.BaseActivity
+import com.example.module_common.constants.RouterManager
+import com.example.module_common.eventbus.EventBusMessage
 import com.example.module_common.permission.PermissionX
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qyh_practice.adapter.ViewPagerAdapter
@@ -14,9 +19,14 @@ import com.qyh_practice.databinding.ActivityMainBinding
 import com.qyh_practice.live.LiveFragment
 import com.qyh_practice.message.messageFragment
 import com.qyh_practice.mine.myFragment
+import com.qyh_practice.module_login.SplashActivity
+import com.qyh_practice.module_recommend.RecommendFragment
 import com.qyh_practice.moment.trendFragment
-import com.qyh_practice.recommend.RecommendFragment
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
+@Route(path = RouterManager.ACTIVITY_MAIN)
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPager: ViewPager
@@ -29,8 +39,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-
         setContentView(view)
+
 
         viewPager = binding.viewPager
         navView = binding.navView
@@ -39,23 +49,24 @@ class MainActivity : BaseActivity() {
         if (tv_main_title != null) {
             tv_main_title.setText("仿趣约会")
         }
-        binding.baseToolbar.visibility=View.GONE
-
-
-
+        binding.baseToolbar.visibility = View.GONE
         //toolbar.setLogo(R.drawable.ic_dashboard_black_24dp)
         //tv_sub_title.setText("more")
-
-
-
-
         initViewPager()
         setListener()
-        getPermissions()
+
+        //释放SplashActivity所占用的资源
+        ActivityManager.getInstance().removeActivity(SplashActivity::class.java)
+        //getPermissions()
+
+
 
     }
 
+
+
     //请求权限
+    //注意，这个方法每次启动都会请求权限，应尝试修改使用
     private fun getPermissions() {
         PermissionX.request(
             this,
@@ -63,7 +74,7 @@ class MainActivity : BaseActivity() {
             android.Manifest.permission.CAMERA
         ) { allGranted, deniedList ->
             if (allGranted) {
-                Toast.makeText(this, "All permissions are granted", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "All permissions are granted", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "You denied $deniedList", Toast.LENGTH_SHORT).show()
             }
