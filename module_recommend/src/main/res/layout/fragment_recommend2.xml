@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Recommend2Fragment">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:background="@color/white"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:minHeight="@dimen/dimen_70"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
                 android:id="@+id/iv_top_bg"
@@ -37,6 +38,7 @@
                 />
 
             <FrameLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -73,10 +75,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+
             tools:listitem="@layout/item_recommend_userinfo"
 
 
@@ -84,10 +83,5 @@
 
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
-    <com.example.module_common.ui.EmptyView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

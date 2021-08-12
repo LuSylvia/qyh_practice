@@ -26,6 +26,9 @@ class RecommendUserAdapter(val context: Context) :
                 return oldItem.userId == newItem.userId
             }
 
+            /**
+             * 比较2个item的内容是否相同
+             */
             override fun areContentsTheSame(
                 oldItem: RecommendUserInfo,
                 newItem: RecommendUserInfo
@@ -41,17 +44,17 @@ class RecommendUserAdapter(val context: Context) :
         val tv_workcity_str: TextView = itemView.findViewById(R.id.tv_workcitystr)
         val tv_nickName: TextView = itemView.findViewById(R.id.tv_nickname)
         val tv_age: TextView = itemView.findViewById(R.id.tv_age)
-
     }
 
     override fun onBindViewHolder(holder: RecommendUserViewHolder, position: Int) {
+        //paging内置了getItem函数
         val recommendUserInfo = getItem(position)
         if (recommendUserInfo != null) {
             holder.tv_age.text = recommendUserInfo.age.toString()
             holder.tv_workcity_str.text = recommendUserInfo.workCityStr
             holder.tv_nickName.text = recommendUserInfo.nickName
 
-            //TODO:用Glide加载头像
+            //用Glide加载头像
             Glide.with(context).load(recommendUserInfo.avatar).into(holder.iv_avatar);
         }
 

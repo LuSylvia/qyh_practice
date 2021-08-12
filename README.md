@@ -41,3 +41,6 @@ v0.09 解决了appBarconfig问题——该问题实际是未完成注册的用�
 导入了ARouter和EventBus,已经成功实现页面路由跳转和事件发送，后续可能会添加ARouter的拦截器
 
 进一步美化推荐页的UI，目前的难点是实现headerview的背景透明化
+
+v0.091 Paging3的分页加载目前遇到了问题：getIDs函数根本没调用完就走到下一步获取userInfo的函数，目前暂时用testAdapter实现数据显示
+

@@ -1,7 +1,6 @@
 package com.qyh_practice
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -11,7 +10,6 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.module_common.activity.ActivityManager
 import com.example.module_common.activity.BaseActivity
 import com.example.module_common.constants.RouterManager
-import com.example.module_common.eventbus.EventBusMessage
 import com.example.module_common.permission.PermissionX
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qyh_practice.adapter.ViewPagerAdapter
@@ -20,11 +18,8 @@ import com.qyh_practice.live.LiveFragment
 import com.qyh_practice.message.messageFragment
 import com.qyh_practice.mine.myFragment
 import com.qyh_practice.module_login.SplashActivity
-import com.qyh_practice.module_recommend.RecommendFragment
+import com.qyh_practice.module_recommend.Recommend2Fragment
 import com.qyh_practice.moment.trendFragment
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 @Route(path = RouterManager.ACTIVITY_MAIN)
 class MainActivity : BaseActivity() {
@@ -60,9 +55,7 @@ class MainActivity : BaseActivity() {
         //getPermissions()
 
 
-
     }
-
 
 
     //请求权限
@@ -84,7 +77,7 @@ class MainActivity : BaseActivity() {
 
     //ViewPager初始化
     private fun initViewPager() {
-        val recommendationFragment = RecommendFragment()
+        val recommendationFragment = Recommend2Fragment()
         val blindDateFragment = LiveFragment()
         val trendFragment = trendFragment()
         val messageFragment = messageFragment()

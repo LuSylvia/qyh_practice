@@ -1,35 +1,48 @@
 package com.qyh_practice.module_recommend.entity
 
 import com.example.module_common.entity.BaseEntity
-import java.io.Serializable
+
+
+open class NearByEntity : BaseEntity() {
+    override fun uniqueKey(): Array<String>? {
+        return arrayOf()
+    }
+
+}
+
+/**
+ * 推荐基类
+ */
+open class RecommentBaseEntity : NearByEntity()
+
 
 data class RecommendUserInfo(
     val age: Int,
-    val avatar: String? = null,
+    val avatar: String,
     /**
      * 性别
      */
     val gender: Int,
-    val desc: String? = null,
+    val desc: String,
     /**
      * 0:无，1相亲中，2专属相亲
      */
-    val liveType: Int = 0,
+    val liveType: Int,
     /**
      * 是否是VIP
      */
-    val isVIP: Boolean = false,
+    val isVIP: Boolean,
     /**
      * 是否实名
      */
-    val isRealName: Boolean = false,
-    val nickName: String? = null,
+    val isRealName: Boolean,
+    val nickName: String,
     /**
      * 是否有关系
      */
-    val hasRelation: Boolean = false,
-    val userId: Int = 0,
-    val workCityStr: String? = null,
+    val hazRelation: Boolean,
+    val userId: Int,
+    val workCityStr: String,
     /**
      * 0不在线，1 1小时内，2当天活跃
      */
@@ -41,7 +54,7 @@ data class RecommendUserInfo(
     /**
      * 所在房间的主播ID
      */
-    val anchorid: Int,
+    val anchorId: Int,
     val defaultAvatar: Boolean = false,
     /**
      * 是否是新用户
@@ -49,7 +62,7 @@ data class RecommendUserInfo(
     val isNewUser: Boolean = false,
     val mediaList: List<MediaList>? = null
 
-):Serializable
+) : RecommentBaseEntity()
 
 data class MediaList(
     /**
@@ -60,6 +73,4 @@ data class MediaList(
      * 媒体路径
      */
     val mediaURL: String?
-):BaseEntity(){
-    override fun uniqueKey(): Array<String>?=null
-}
+) : RecommentBaseEntity()

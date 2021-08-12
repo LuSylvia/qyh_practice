@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 import com.qyh_practice.module_recommend.R
+import com.qyh_practice.module_recommend.entity.RecommendListEntity
 import com.qyh_practice.module_recommend.entity.TestUserEntity
 
 class TestUserAdapter(val context: Context, val testUserList: List<TestUserEntity>) :
@@ -22,6 +23,12 @@ class TestUserAdapter(val context: Context, val testUserList: List<TestUserEntit
 
     }
 
+    var recommendListEntity:RecommendListEntity?=null
+
+
+    fun setRecommendList(recommendListEntity: RecommendListEntity){
+        this.recommendListEntity=recommendListEntity;
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestUserViewHolder {
         val viewHolder = LayoutInflater.from(parent.context)
@@ -31,17 +38,34 @@ class TestUserAdapter(val context: Context, val testUserList: List<TestUserEntit
 
     override fun onBindViewHolder(holder: TestUserViewHolder, position: Int) {
         //set value for each viewHolder
-        val testUserInfo = testUserList[position]
+        if(recommendListEntity==null){
+            val testUserInfo = testUserList[position]
 
-        holder.tv_age.setText(testUserInfo.age.toString())
-        holder.tv_nickName.setText(testUserInfo.nickname)
-        holder.tv_workcity_str.setText(testUserInfo.workcity_str)
-        //头像读取用Glide
-        Glide.with(context)
-            .load(R.drawable.girl)
-            .override(100, 100)
-            .circleCrop()
-            .into(holder.iv_avatar);
+            holder.tv_age.setText(testUserInfo.age.toString())
+            holder.tv_nickName.setText(testUserInfo.nickname)
+            holder.tv_workcity_str.setText(testUserInfo.workcity_str)
+            //头像读取用Glide
+            Glide.with(context)
+                .load(R.drawable.girl)
+                .override(100, 100)
+                .circleCrop()
+                .into(holder.iv_avatar);
+        }else{
+            val userInfo= recommendListEntity!!.list[position]
+
+            holder.tv_age.setText(userInfo.age.toString())
+            holder.tv_nickName.setText(userInfo.nickName)
+            holder.tv_workcity_str.setText(userInfo.workCityStr)
+            //头像读取用Glide
+            Glide.with(context)
+                .load(userInfo.avatar)
+                .override(100, 100)
+                .circleCrop()
+                .into(holder.iv_avatar);
+
+
+        }
+
 
 
     }

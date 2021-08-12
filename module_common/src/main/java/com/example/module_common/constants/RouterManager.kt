@@ -6,7 +6,7 @@ class RouterManager {
         const val ACTIVITY_SPLASH:String="/module_login/SplashActivity"
         const val ACTIVITY_MAIN:String="/app/MainActivity"
 
-        const val FRAGMENT_RECOMMEND:String="/module_recommend/RecommendFragment"
+        const val FRAGMENT_RECOMMEND:String="/module_recommend/Recommend2Fragment"
 
     }
 }
