@@ -7,6 +7,7 @@ import androidx.paging.PagingState
 import com.example.module_common.utils.LogUtil
 import com.qyh_practice.module_recommend.api.RecommendService
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlin.math.min
@@ -28,14 +29,15 @@ class RecommendUserPagingSource(
     override suspend fun load(params: LoadParams<String>): LoadResult<String, RecommendUserInfo> {
 
         return try {
-
-            val userInfos = service.getRecommendList(sids = getRequestIds()).data.list
+            val sidList = service.getRecommendSids(workcity).data.list
+            val sidsStr = sidList.joinToString(separator = ",")
+            val userInfos = service.getRecommendList(sidsStr).data.list
             Log.d("Sylvia-success", "头像是${userInfos[0].avatar}")
             LoadResult.Page(
                 data = userInfos,
                 //只能向前
                 prevKey = null,
-                nextKey = runBlocking { async { getRequestIds() }.await() }
+                nextKey = params.key.plus(1)
             )
 
         } catch (e: Exception) {
