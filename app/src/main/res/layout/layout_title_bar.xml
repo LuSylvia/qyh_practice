@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="标题"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_18sp"
+            android:textSize="@dimen/sp_18"
 
             ></TextView>
 

@@ -25,7 +25,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="40dp"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_18sp"
+        android:textSize="@dimen/sp_18"
         android:gravity="center"
         android:layout_marginTop="40dp"
         android:text="龙曦"
@@ -42,7 +42,7 @@
         android:gravity="center"
         android:text="18岁"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_16sp"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintStart_toStartOf="@+id/tv_nickname"
         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
 
@@ -53,7 +53,7 @@
         android:gravity="center"
         android:text="深圳"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_16sp"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="@+id/tv_nickname"
         app:layout_constraintTop_toTopOf="@+id/tv_age" />
 </androidx.constraintlayout.widget.ConstraintLayout>

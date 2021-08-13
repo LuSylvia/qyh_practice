@@ -24,7 +24,7 @@
         android:visibility="gone"
         android:text="@string/string_empty"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_18sp"
+        android:textSize="@dimen/sp_18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_empty" />

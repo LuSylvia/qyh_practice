@@ -8,44 +8,43 @@
         android:id="@+id/tv_video"
         android:layout_width="0dp"
         android:layout_height="104dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
-
+        android:layout_marginStart="@dimen/dp_11"
+        android:layout_marginTop="@dimen/dp_70"
         android:background="@drawable/bg_live"
-        app:layout_constraintRight_toLeftOf="@id/tv_zhuanshu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_zhuanshu"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
     <TextView
         android:id="@+id/tv_zhuanshu"
         android:layout_width="0dp"
         android:layout_height="104dp"
-        android:layout_marginEnd="144dp"
-
-        android:background="@drawable/bg_live"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/tv_video"
-
+        android:background="@drawable/bg_exclusive"
+        app:layout_constraintLeft_toRightOf="@+id/tv_video"
+        app:layout_constraintRight_toLeftOf="@+id/tv_group_chat"
         app:layout_constraintTop_toTopOf="@+id/tv_video" />
 
     <TextView
         android:id="@+id/tv_group_chat"
         android:layout_width="0dp"
         android:layout_height="104dp"
+        android:background="@drawable/bg_manypeople"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="11dp"
 
-
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/bg_live"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/tv_zhuanshu"
-        app:layout_constraintTop_toTopOf="@+id/tv_video" />
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toTopOf="@+id/tv_video"
+        app:layout_constraintLeft_toRightOf="@+id/tv_zhuanshu"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
         android:id="@+id/iv_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_19dp"
-        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginStart="@dimen/dp_19"
+        android:layout_marginTop="@dimen/dp_20"
         app:layout_constraintLeft_toLeftOf="@+id/tv_video"
         app:layout_constraintTop_toTopOf="@+id/tv_video"
         app:srcCompat="@drawable/icon_live"
@@ -56,8 +55,8 @@
         android:id="@+id/iv_zhuanshu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_19dp"
-        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginStart="@dimen/dp_19"
+        android:layout_marginTop="@dimen/dp_20"
         app:layout_constraintLeft_toLeftOf="@+id/tv_zhuanshu"
         app:layout_constraintTop_toTopOf="@+id/tv_zhuanshu"
         app:srcCompat="@drawable/icon_exclusive"
@@ -68,8 +67,8 @@
         android:id="@+id/iv_group_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_19dp"
-        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginStart="@dimen/dp_19"
+        android:layout_marginTop="@dimen/dp_20"
         app:layout_constraintLeft_toLeftOf="@+id/tv_group_chat"
         app:layout_constraintTop_toTopOf="@+id/tv_group_chat"
         app:srcCompat="@drawable/icon_manypeople"
@@ -80,61 +79,61 @@
         android:id="@+id/tv_video_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_17dp"
+        android:layout_marginTop="@dimen/dp_17"
         android:text="@string/live_public_4"
-        android:textSize="@dimen/text_14sp"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintLeft_toLeftOf="@+id/iv_video"
         app:layout_constraintTop_toBottomOf="@+id/iv_video"
 
         />
+
     <TextView
         android:id="@+id/tv_zhuanshu_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_17dp"
+        android:layout_marginTop="@dimen/dp_17"
         android:text="@string/live_private_4"
-        android:textSize="@dimen/text_14sp"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintLeft_toLeftOf="@+id/iv_zhuanshu"
         app:layout_constraintTop_toBottomOf="@+id/iv_zhuanshu"
 
         />
+
     <TextView
         android:id="@+id/tv_group_chat_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_17dp"
+        android:layout_marginTop="@dimen/dp_17"
         android:text="@string/live_group_4"
-        android:textSize="@dimen/text_14sp"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintLeft_toLeftOf="@+id/iv_group_chat"
-        app:layout_constraintTop_toBottomOf="@+id/iv_group_chat"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/iv_group_chat" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_18"
         android:background="@drawable/ic_recommend_head_arrow"
-        app:layout_constraintRight_toRightOf="@id/tv_video"
-        app:layout_constraintTop_toTopOf="@+id/tv_video_tips"
         app:layout_constraintBottom_toBottomOf="@+id/tv_video_tips"
-        android:layout_marginEnd="@dimen/dimen_18dp"
-        />
+        app:layout_constraintRight_toRightOf="@id/tv_video"
+        app:layout_constraintTop_toTopOf="@+id/tv_video_tips" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_18"
         android:background="@drawable/ic_recommend_head_arrow"
-        app:layout_constraintRight_toRightOf="@id/tv_zhuanshu"
-        app:layout_constraintTop_toTopOf="@+id/tv_zhuanshu_tips"
         app:layout_constraintBottom_toBottomOf="@+id/tv_zhuanshu_tips"
-        android:layout_marginEnd="@dimen/dimen_18dp"
-        />
+        app:layout_constraintRight_toRightOf="@id/tv_zhuanshu"
+        app:layout_constraintTop_toTopOf="@+id/tv_zhuanshu_tips" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_18"
         android:background="@drawable/ic_recommend_head_arrow"
-        app:layout_constraintRight_toRightOf="@id/tv_group_chat"
-        app:layout_constraintTop_toTopOf="@+id/tv_group_chat_tips"
         app:layout_constraintBottom_toBottomOf="@+id/tv_group_chat_tips"
-        android:layout_marginEnd="@dimen/dimen_18dp"
-        />
+        app:layout_constraintRight_toRightOf="@id/tv_group_chat"
+        app:layout_constraintTop_toTopOf="@+id/tv_group_chat_tips" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:minHeight="@dimen/dimen_70"
+            android:minHeight="@dimen/dp_70"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView

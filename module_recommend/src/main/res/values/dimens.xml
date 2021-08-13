@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dimen_19dp">19dp</dimen>
-    <dimen name="dimen_17dp">17dp</dimen>
-    <dimen name="dimen_18dp">18dp</dimen>
-    <dimen name="dimen_20dp">20dp</dimen>
-    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="dp_19">19dp</dimen>
+    <dimen name="dp_17">17dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="sp_18">18sp</dimen>
     <dimen name="dp_10">10dp</dimen>
-    <dimen name="dimen_70">70dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="dp_11">11dp</dimen>
 </resources>
