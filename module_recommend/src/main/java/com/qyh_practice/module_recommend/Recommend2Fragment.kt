@@ -8,18 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.module_common.constants.RouterManager
-import com.example.module_common.entity.LoadState
 import com.example.module_common.eventbus.EventBusMessage
 import com.qyh_practice.module_recommend.adapter.RecommendUserAdapter
 import com.qyh_practice.module_recommend.adapter.TestUserAdapter
 import com.qyh_practice.module_recommend.databinding.FragmentRecommend2Binding
 import com.qyh_practice.module_recommend.entity.TestUserEntity
 import com.qyh_practice.module_recommend.viewModel.RecommendViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -35,10 +36,6 @@ class Recommend2Fragment : Fragment() {
 
     //paging3使用的adapter
     private lateinit var pagingAdapter: RecommendUserAdapter
-
-    private val workcity: Int by lazy {
-        0
-    }
 
 
     enum class AppBarState {
@@ -109,13 +106,13 @@ class Recommend2Fragment : Fragment() {
     @SuppressLint("ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initList()
-        adapter = context?.let { TestUserAdapter(it, testUserInfos) }!!
+        //initList()
+        //adapter = context?.let { TestUserAdapter(it, testUserInfos) }!!
         pagingAdapter = context?.let { RecommendUserAdapter(it) }!!
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.adapter = adapter
+        //binding.recyclerView.adapter = adapter
 
-        //binding.recyclerView.adapter = pagingAdapter
+        binding.recyclerView.adapter = pagingAdapter
 
         //添加分隔线
         val itemDecoration = DividerItemDecoration(
@@ -135,57 +132,57 @@ class Recommend2Fragment : Fragment() {
         //TODO:获取workcity，从SharedPrefences拿
         val workcity: Int = 10101000
 
-//        lifecycleScope.launch {
-//            viewModel.getPagingData(workcity).collect { pagingData ->
-//                //核心函数，调用submitData后，Paging3才会开始工作
-//                pagingAdapter.submitData(pagingData)
-//            }
-//        }
-//        pagingAdapter.addLoadStateListener {
-//            when (it.refresh) {
-//                is androidx.paging.LoadState.Loading -> {
-//                    //加载中
-//                    Log.d("Sylvia-loading", "推荐页加载中")
-//                }
-//                is androidx.paging.LoadState.NotLoading -> {
-//                    Log.d("Sylvia-Success", "推荐页加载完成")
-//
-//                }
-//                is androidx.paging.LoadState.Error -> {
-//                    Log.d("Sylvia-Error", "推荐页网络异常")
-//                    binding.recyclerView.visibility = View.GONE
-//
-//                }
-//            }
-//        }
-
-        viewModel.getRecommendSids(workcity)
-        viewModel.loadState.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                LoadState.SUCCESS -> {
-                    Log.d("Sylvia-Success", "推荐页成功了")
-                    viewModel.recommendPeopleLiveData.observe(viewLifecycleOwner, Observer {
-                        viewModel.recommendPeopleLiveData.value?.let { it1 ->
-                            adapter.setRecommendList(
-                                it1
-                            )
-                            adapter.notifyDataSetChanged()
-                        }
-                        Log.d("Sylvia-Success", "头像是" + it.list.get(0).avatar)
-                    })
-                    return@Observer
-                }
-                LoadState.EMPTY -> {
-                    Log.d("Sylvia-Empty", "推荐页为空")
-                    return@Observer
-                }
-                LoadState.FAIL -> {
-                    Log.d("Sylvia-Fail", "推荐页加载失败")
-                    return@Observer
-                }
-
+        lifecycleScope.launch {
+            viewModel.getPagingData(workcity).collect { pagingData ->
+                //核心方法submitData
+                pagingAdapter.submitData(pagingData)
             }
-        })
+        }
+        pagingAdapter.addLoadStateListener {
+            when (it.refresh) {
+                is androidx.paging.LoadState.Loading -> {
+                    //加载中
+                    Log.d("Sylvia-loading", "推荐页加载中")
+                }
+                is androidx.paging.LoadState.NotLoading -> {
+                    Log.d("Sylvia-Success", "推荐页加载完成")
+
+                }
+                is androidx.paging.LoadState.Error -> {
+                    Log.d("Sylvia-Error", "推荐页网络异常")
+                    binding.recyclerView.visibility = View.GONE
+
+                }
+            }
+        }
+
+//        viewModel.getRecommendSids(workcity)
+//        viewModel.loadState.observe(viewLifecycleOwner, Observer {
+//            when (it) {
+//                LoadState.SUCCESS -> {
+//                    Log.d("Sylvia-Success", "推荐页成功了")
+//                    viewModel.recommendPeopleLiveData.observe(viewLifecycleOwner, Observer {
+//                        viewModel.recommendPeopleLiveData.value?.let { it1 ->
+//                            adapter.setRecommendList(
+//                                it1
+//                            )
+//                            adapter.notifyDataSetChanged()
+//                        }
+//                        Log.d("Sylvia-Success", "头像是" + it.list.get(0).avatar)
+//                    })
+//                    return@Observer
+//                }
+//                LoadState.EMPTY -> {
+//                    Log.d("Sylvia-Empty", "推荐页为空")
+//                    return@Observer
+//                }
+//                LoadState.FAIL -> {
+//                    Log.d("Sylvia-Fail", "推荐页加载失败")
+//                    return@Observer
+//                }
+//
+//            }
+//        })
 
 
         /**

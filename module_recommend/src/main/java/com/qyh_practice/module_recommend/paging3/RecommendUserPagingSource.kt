@@ -7,7 +7,8 @@ import androidx.paging.PagingState
 import com.example.module_common.utils.LogUtil
 import com.qyh_practice.module_recommend.api.RecommendService
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import kotlin.math.min
 
 class RecommendUserPagingSource(
@@ -15,18 +16,9 @@ class RecommendUserPagingSource(
     private val workcity: Int
 ) : PagingSource<String, RecommendUserInfo>() {
     companion object {
-        /**
-         * key的列表，用于获取数据
-         */
-        val keys: ArrayList<String> = ArrayList()
-
         val mIds = arrayListOf<String>()
         val mLastIds = arrayListOf<String>()
-
         const val PAGE_SIZE = 10
-
-        //代表要读key里的哪个数据
-        var position: Int = 0
     }
 
 
@@ -37,24 +29,18 @@ class RecommendUserPagingSource(
 
         return try {
 
-
-                getIds(workcity)
-                Log.d("Sylvia-success", "id是${mIds.joinToString(separator = ",")}")
-
-            //从网络读取数据
-            delay(3000)
             val userInfos = service.getRecommendList(sids = getRequestIds()).data.list
-            delay(3000)
+            Log.d("Sylvia-success", "头像是${userInfos[0].avatar}")
             LoadResult.Page(
                 data = userInfos,
                 //只能向前
                 prevKey = null,
-                nextKey = service.getRecommendSids(workcity).data.list.joinToString(separator = ",")
+                nextKey = runBlocking { async { getRequestIds() }.await() }
             )
 
         } catch (e: Exception) {
             //获取数据失败，抛出异常
-            LogUtil.e("PagingSource", "分页加载推荐用户信息异常，原因是：${e.message}")
+            LogUtil.e("Sylvia-Exception", "分页加载推荐用户信息异常，原因是：${e.message}")
             LoadResult.Error(e)
         }
 
@@ -68,9 +54,9 @@ class RecommendUserPagingSource(
     }
 
 
-    fun getRequestIds(): String {
-        if (mIds.isEmpty()) {
-            return ""
+    suspend fun getRequestIds(): String {
+        runBlocking {
+            getIds(workcity)
         }
         mLastIds.clear()
         mLastIds.addAll(mIds.subList(0, min(mIds.size, PAGE_SIZE)))

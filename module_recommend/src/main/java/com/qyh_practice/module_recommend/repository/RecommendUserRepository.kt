@@ -5,14 +5,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.module_common.entity.BaseRepository
 import com.example.module_common.retrofit.RetrofitManager
-import com.example.module_common.utils.LogUtil
 import com.qyh_practice.module_recommend.api.RecommendService
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
 import com.qyh_practice.module_recommend.paging3.RecommendUserPagingSource
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.runBlocking
 
 class RecommendUserRepository private constructor() : BaseRepository() {
     companion object {

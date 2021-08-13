@@ -7,5 +7,5 @@ import java.util.List;
 
 public class RecommendListEntity extends ResponseEntity.Data {
     public boolean hazNext;
-    public List<RecommendUserInfo> list;
+    public List<RecommendUserInfo> list=new ArrayList<>();
 }

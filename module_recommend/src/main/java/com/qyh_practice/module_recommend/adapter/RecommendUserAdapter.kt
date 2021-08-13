@@ -14,7 +14,6 @@ import com.qyh_practice.module_recommend.R
 import com.qyh_practice.module_recommend.entity.RecommendUserInfo
 
 
-//TODO:继承PagingDataAdapter，修改构造函数参数
 class RecommendUserAdapter(val context: Context) :
     PagingDataAdapter<RecommendUserInfo, RecommendUserAdapter.RecommendUserViewHolder>(COMPARATOR) {
     companion object {
@@ -49,7 +48,7 @@ class RecommendUserAdapter(val context: Context) :
     override fun onBindViewHolder(holder: RecommendUserViewHolder, position: Int) {
         //paging内置了getItem函数
         val recommendUserInfo = getItem(position)
-        if (recommendUserInfo != null) {
+        recommendUserInfo?.let {
             holder.tv_age.text = recommendUserInfo.age.toString()
             holder.tv_workcity_str.text = recommendUserInfo.workCityStr
             holder.tv_nickName.text = recommendUserInfo.nickName

@@ -2,7 +2,9 @@ package com.qyh_practice.module_recommend.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.module_common.BaseViewModel
 import com.example.module_common.entity.LoadState
 import com.example.module_common.retrofit.RetrofitManager
@@ -35,19 +37,11 @@ class RecommendViewModel : BaseViewModel() {
                 //判断列表数据是否为空
                 if (response.await().data.list?.isEmpty() == true) {
                     loadState.value = LoadState.EMPTY
-                    Log.d(
-                        "Sylvia-ViewModel",
-                        "推荐页成！头像是${response.await().data.list[0].avatar}"
-                    )
                 } else {
                     loadState.value = LoadState.SUCCESS
                     //给LiveData填充数据
                     recommendPeopleLiveData.value =
                         response.await().data
-                    Log.d(
-                        "Sylvia-ViewModel",
-                        "推荐页成！头像是${response.await().data.list[0].avatar}"
-                    )
                 }
 
             } else {
@@ -55,8 +49,6 @@ class RecommendViewModel : BaseViewModel() {
                 loadState.value = LoadState.FAIL
                 Log.d("Sylvia-ViewModel", "推荐页 获取列表失败，提示是${response.await().errorMessage}")
             }
-
-
         }, {
             loadState.value = LoadState.FAIL
         })
@@ -89,7 +81,7 @@ class RecommendViewModel : BaseViewModel() {
      */
     fun getPagingData(workcity: Int): Flow<PagingData<RecommendUserInfo>> {
         Log.d("Sylvia-loading", "workcity是${workcity}")
-        return RecommendUserRepository.instance.getPagingData(workcity = workcity)
+        return RecommendUserRepository.instance.getPagingData(workcity = workcity).cachedIn(viewModelScope)
     }
 
 
