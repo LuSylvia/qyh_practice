@@ -54,7 +54,10 @@ class RecommendUserAdapter(val context: Context) :
             holder.tv_nickName.text = recommendUserInfo.nickName
 
             //用Glide加载头像
-            Glide.with(context).load(recommendUserInfo.avatar).into(holder.iv_avatar);
+            Glide.with(context).
+            load(recommendUserInfo.avatar).
+            circleCrop().
+            into(holder.iv_avatar);
         }
 
     }

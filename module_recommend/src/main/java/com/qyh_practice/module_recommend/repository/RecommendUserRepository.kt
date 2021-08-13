@@ -20,7 +20,7 @@ class RecommendUserRepository private constructor() : BaseRepository() {
         /**
          * 一页只有10条用户数据，用完就该重新获取了
          */
-        private const val PAGE_SIZE = 10
+        private const val PAGE_SIZE = 28
 
         /**
          * 预刷新的距离，距离最后一个item多远时加载数据

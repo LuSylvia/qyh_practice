@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.module_common.notification.NotificationUtil
+import com.example.module_common.utils.CookieHelper
 import com.qyh_practice.databinding.FragmentMyBinding
 
 
@@ -34,7 +35,10 @@ class myFragment : Fragment() {
 
     fun setListener() {
         binding.btnQuit.setOnClickListener {
-            //TODO:实现强制下线功能
+            //强制下线
+            //需要先清除本地缓存
+
+
             val intent = Intent("com.qyh_practice.broadcast.FORCE_OFFLINE")
             activity?.sendBroadcast(intent)
         }

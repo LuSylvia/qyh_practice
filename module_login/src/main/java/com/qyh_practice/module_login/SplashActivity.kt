@@ -39,18 +39,20 @@ class SplashActivity : AppCompatActivity() {
                 val appConfigResponse = async {
                     RetrofitManager.getService(LoginService::class.java).getAppConfig()
                 }.await()
-                Log.d("Sylvia-Success", "自动登录成功！")
+
 
                 //获取配置信息成功
                 if (!appConfigResponse.isError && appConfigResponse.data != null) {
                     AccountManager.getInstance().setAppConfigEntity(appConfigResponse.data)
                     EventBus.getDefault().postSticky(EventBusMessage(appConfigResponse.data.workcity))
+                    Log.d("Syliva-test","工作城市是${appConfigResponse.data.workcity}")
+                    Log.d("Sylvia-Success", "自动登录成功！")
                     jumpMainActivity()
                     return@launch
                 }
             }
             Log.d("Sylvia-FAIL", "自动登录失败，根本没本地数据！")
-            delay(1000)
+            delay(2000)
             jumpLoginActivity()
         }
     }
@@ -69,11 +71,6 @@ class SplashActivity : AppCompatActivity() {
 
 
     private fun jumpMainActivity() {
-        //EVENTBUS测试,传用户ID
-        val eventBusMessage:EventBusMessage= EventBusMessage(AccountManager.getInstance().loadUserId())
-        EventBus.getDefault().postSticky(eventBusMessage)
-        Log.d("Syliva-test","测试消息是${eventBusMessage.getUserID()}")
-
         //ARouter的跳转速度实在是太慢了，如果直接finish会导致先返回手机桌面，再进入登录界面
         //目前逻辑是跳转成功后，直接finish掉SplashActivity
         ARouter.getInstance().build(RouterManager.ACTIVITY_MAIN).navigation()
