@@ -36,15 +36,14 @@ class myFragment : Fragment() {
     fun setListener() {
         binding.btnQuit.setOnClickListener {
             //强制下线
-            //需要先清除本地缓存
-
-
+            //需要先清除本地Cookie
+            CookieHelper.getInstance().clearCookie()
             val intent = Intent("com.qyh_practice.broadcast.FORCE_OFFLINE")
             activity?.sendBroadcast(intent)
         }
 
         binding.btnSendNotification.setOnClickListener {
-            //TODO:发送通知
+            //T发送通知
             context?.let { it1 ->
                 NotificationUtil.sendNotification(it1, "测试内容", null)
             }

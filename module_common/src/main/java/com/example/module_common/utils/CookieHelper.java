@@ -31,6 +31,18 @@ public class CookieHelper {
         return Singleton.instance;
     }
 
+
+    public void clearCookie(){
+        this.cookieStore.clear();
+        try {
+            kv.putString(MMKV_COOKIE_KEY, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     /**
      * 将Cookies保存到本地
      *

@@ -14,10 +14,6 @@ class RecommendHeaderView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-
-
-
-
      init {
         val view: View =LayoutInflater.from(context).inflate(R.layout.item_recommend_header,this,false)
         //TODO:绑定3个textview控件，并设置跳转事件

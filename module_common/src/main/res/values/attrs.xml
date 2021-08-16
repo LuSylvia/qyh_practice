@@ -15,4 +15,15 @@
 
     </declare-styleable>
 
+
+
+    <declare-styleable name="ZhenAiCircle">
+        <attr name="smallCircleRadius" format="dimension" /><!-- 小圆半径-->
+        <attr name="smallCircleColor" format="color|reference" /><!-- 小圆颜色-->
+        <attr name="diffusionCircleColor" format="color|reference" /><!-- 扩散圆颜色-->
+        <attr name="startScan" format="boolean" /><!--是否开启扫描-->
+        <attr name="startDiffuse" format="boolean"/> <!--是否开启扩散-->
+
+
+    </declare-styleable>
 </resources>

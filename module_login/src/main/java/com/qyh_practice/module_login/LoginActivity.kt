@@ -155,7 +155,7 @@ class LoginActivity : BaseActivity() {
                 if (phone.length != 11 || code.length != 4) {
                     return@setOnClickListener
                 }
-                //TODO:自定义广播测试
+                //自定义广播测试
                 val intent = Intent("com.example.broadcasttest.MyBroadcast")
                 intent.setPackage(packageName)
                 //sendBroadcast(intent)

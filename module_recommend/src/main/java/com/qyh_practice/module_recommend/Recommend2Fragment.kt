@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.module_common.constants.RouterManager
 import com.example.module_common.eventbus.EventBusMessage
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.BaseOnOffsetChangedListener
 import com.qyh_practice.module_recommend.adapter.RecommendUserAdapter
 import com.qyh_practice.module_recommend.databinding.FragmentRecommend2Binding
 import com.qyh_practice.module_recommend.viewModel.RecommendViewModel
@@ -27,7 +29,7 @@ import org.greenrobot.eventbus.ThreadMode
 class Recommend2Fragment : Fragment() {
     private lateinit var binding: FragmentRecommend2Binding
     private val viewModel: RecommendViewModel by activityViewModels()
-    private var height: Float = 0.0F
+    private var height: Float = 272f
     private var mBeforeStare = AppBarState.IDLE;
 
 
@@ -38,9 +40,9 @@ class Recommend2Fragment : Fragment() {
 
 
     enum class AppBarState {
-        EXPANDED,//展开
-        COLLAPSED,//折叠
-        IDLE//展开与折叠的中间状态
+        EXPANDED,//toolbar没完全收起，这时应该是被用户用手指按着的状态
+        COLLAPSED,//折叠完成，代表用户已经滑到下面去了，这个toolbar该收起来了
+        IDLE//空闲，最初啥都没动就是该状态，toolbar自然展开
     }
 
     override fun onCreateView(
@@ -127,12 +129,91 @@ class Recommend2Fragment : Fragment() {
                 }
             }
         }
+        //动态修改appBarLayout透明度和颜色
+        binding.appBarLayout.addOnOffsetChangedListener(object :AppBarLayout.OnOffsetChangedListener{
+            /**
+             * Called when the {@link AppBarLayout}'s layout offset has been changed. This allows child
+             * views to implement custom behavior based on the offset (for instance pinning a view at a
+             * certain y value).
+             *
+             * @param appBarLayout the {@link AppBarLayout} which offset has changed
+             * @param verticalOffset the vertical offset for the parent {@link AppBarLayout}, in px
+             */
+            override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+                if(verticalOffset==0){
+                    Log.d("Sylvia-listener","起始状态！")
+                    //此时是啥都没动，最原始的展开状态
+                    if(mBeforeStare==AppBarState.IDLE){
+                        return
+                    }
+                    mBeforeStare=AppBarState.IDLE
+                    binding.tvTitle.alpha=1f
+                    binding.ivTopBg.alpha=1f
+                    binding.recommendHeaderView.alpha=1f
+                    binding.tvTitle.setBackgroundResource(R.drawable.ic_funnydate_white)
+                    binding.frameLayoutTitle.setBackgroundColor(R.color.transparent)
+                    binding.vTitleUnderline.visibility=View.INVISIBLE
+
+                }else if(Math.abs(verticalOffset)>height){
+                    //此时已经动完了，该折叠起来了
+                    if(mBeforeStare==AppBarState.COLLAPSED){
+                        return
+                    }
+                    mBeforeStare=AppBarState.COLLAPSED
+
+                    binding.tvTitle.alpha=1f
+                    binding.ivTopBg.alpha=1f
+                    binding.recommendHeaderView.alpha=1f
+                    binding.tvTitle.setBackgroundResource(R.drawable.ic_funnydate_color)
+                    binding.frameLayoutTitle.setBackgroundColor(R.color.white)
+
+                    binding.recommendHeaderView.visibility=View.INVISIBLE
+
+                    binding.vTitleUnderline.visibility=View.VISIBLE
+
+                    Log.d("Sylvia-listener","折叠状态！")
+                }else{
+                    //此时中间状态，既没有完全折叠，也没有完全展开
+
+                    binding.recommendHeaderView.visibility=View.VISIBLE
+
+                    if(mBeforeStare==AppBarState.IDLE){
+                        binding.vTitleUnderline.visibility=View.INVISIBLE
+                    }
+                    if(mBeforeStare==AppBarState.IDLE||mBeforeStare==AppBarState.COLLAPSED){
+                        binding.frameLayoutTitle.setBackgroundColor(R.color.transparent)
+                        binding.vTitleUnderline.visibility=View.VISIBLE
+                    }
+                    mBeforeStare=AppBarState.EXPANDED
+
+
+                    changeTitleBarBg(verticalOffset, height)
+                    Log.d("Sylvia-listener","中间状态！")
+                }
+
+
+            }
+
+        })
 
 
 
     }
 
     private fun changeTitleBarBg(verticalOffset: Int, height: Float) {
+        var currFraction:Float=Math.abs(verticalOffset*1.0f/height)
+
+        if(currFraction>1) currFraction=1f
+        else if(currFraction<0) currFraction=0f
+
+        val halfAlpha=1-currFraction
+        //设置透明度
+        binding.ivTopBg.alpha=halfAlpha
+        binding.recommendHeaderView.alpha=halfAlpha
+        binding.tvTitle.alpha=1-halfAlpha
+        Log.d("Sylvia-alpha","changeTitleBarBg,正在修改透明度，alpha=$halfAlpha")
+
+
 
     }
 }
