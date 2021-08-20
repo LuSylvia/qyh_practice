@@ -7,10 +7,10 @@
     android:orientation="vertical"
     tools:context=".Recommend2Fragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.qyh_practice.module_recommend.widget.WithoutOutlineAppBarLayout
         android:id="@+id/app_bar_layout"
         android:background="@color/white"
-
+        app:layout_behavior="com.qyh_practice.module_recommend.widget.FixAppBarLayoutBehavior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -67,7 +67,7 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.qyh_practice.module_recommend.widget.WithoutOutlineAppBarLayout>
 
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout

@@ -19,7 +19,7 @@ import com.qyh_practice.message.messageFragment
 import com.qyh_practice.mine.myFragment
 import com.qyh_practice.module_login.SplashActivity
 import com.qyh_practice.module_recommend.Recommend2Fragment
-import com.qyh_practice.moment.trendFragment
+import com.qyh_practice.moment.MomentFragment
 
 @Route(path = RouterManager.ACTIVITY_MAIN)
 class MainActivity : BaseActivity() {
@@ -79,7 +79,7 @@ class MainActivity : BaseActivity() {
     private fun initViewPager() {
         val recommendationFragment = Recommend2Fragment()
         val blindDateFragment = LiveFragment()
-        val trendFragment = trendFragment()
+        val trendFragment = MomentFragment()
         val messageFragment = messageFragment()
         val myFragment = myFragment()
 

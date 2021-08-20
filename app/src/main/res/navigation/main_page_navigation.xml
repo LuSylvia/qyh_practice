@@ -20,7 +20,7 @@
         android:label="blindDateFragment" />
     <fragment
         android:id="@+id/trendFragment"
-        android:name="com.qyh_practice.moment.trendFragment"
+        android:name="com.qyh_practice.moment.MomentFragment"
         android:label="trendFragment" />
     <fragment
         android:id="@+id/myFragment"

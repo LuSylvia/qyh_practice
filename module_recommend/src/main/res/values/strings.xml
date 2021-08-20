@@ -5,4 +5,11 @@
     <string name="live_group_4">多人交友</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string name="enter_steal_tower">进入偷塔环节</string>
+    
+    <string name="steal_tower_detail">本场还未产生天使，自动进入偷塔环节\n5分钟后将自动设定守护国王\n请把握好时机！</string>
+    <string name="thank_link">感谢环节%s</string>
+    <string name="steal_tower_link">偷塔中</string>
+    
 </resources>

@@ -61,6 +61,17 @@ public class BaseApplication extends Application {
         ARouter.getInstance().destroy();
     }
 
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        switch (level){
+            case TRIM_MEMORY_UI_HIDDEN:
+                //界面已经不可见了，该进行资源释放操作
+                break;
+        }
+
+    }
+
     private void registerActivityLifecycle() {
         registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 
