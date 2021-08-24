@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.SweepGradient
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.annotation.FloatRange
 
@@ -115,10 +116,12 @@ class ZhenAiCircle @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+
         centerX = (w / 2).toFloat()
         centerY = (h / 2).toFloat()
         //大圆的半径=min{控件宽度，控件高度}
         bigCircleRadius = centerX.coerceAtMost(centerY)
+        Log.d("Sylvia-measure-V1", "小圆半径=$smallCircleRadius,大圆半径=$bigCircleRadius")
     }
 
     /**
@@ -165,7 +168,7 @@ class ZhenAiCircle @JvmOverloads constructor(
         //画小圆
         canvas?.drawCircle(centerX, centerY, smallCircleRadius, smallCirclePaint)
         if (startDiffuse) {
-            postInvalidate()
+            invalidate()
         }
     }
 

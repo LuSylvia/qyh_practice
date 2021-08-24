@@ -23,6 +23,14 @@
         <attr name="diffusionCircleColor" format="color|reference" /><!-- 扩散圆颜色-->
         <attr name="startScan" format="boolean" /><!--是否开启扫描-->
         <attr name="startDiffuse" format="boolean"/> <!--是否开启扩散-->
+    </declare-styleable>
+
+    <declare-styleable name="ZhenAiCircleV2">
+        <attr name="smallCircleRadiusV2" format="dimension" /><!-- 小圆半径-->
+        <attr name="smallCircleColorV2" format="color|reference" /><!-- 小圆颜色-->
+        <attr name="diffusionCircleColorV2" format="color|reference" /><!-- 扩散圆颜色-->
+        <attr name="startScanV2" format="boolean" /><!--是否开启扫描-->
+        <attr name="startDiffuseV2" format="boolean"/> <!--是否开启扩散-->
 
 
     </declare-styleable>

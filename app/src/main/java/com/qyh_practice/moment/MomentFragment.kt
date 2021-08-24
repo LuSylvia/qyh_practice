@@ -32,15 +32,14 @@ class MomentFragment : Fragment() {
                 if (countDownTimer != null) {
                     countDownTimer?.cancel()
                     angelThankCountDown()
-                }else{
-                    binding.tvCountdown.text="The World!"
+                } else {
+                    binding.tvCountdown.text = "The World!"
                 }
             }
         }
 
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -50,7 +49,6 @@ class MomentFragment : Fragment() {
         }
 
     }
-
 
     //感谢环节的倒计时，由后台传过来
     private var thankCountDown = 180L
@@ -77,10 +75,7 @@ class MomentFragment : Fragment() {
                         binding.tvCountdown.setTextColor(Color.parseColor("#fd506d"))
                         timeStr = getString(R.string.steal_tower_link) + timeStr
                     }
-
                     binding.tvCountdown.text = timeStr
-
-
                 }
 
                 override fun onFinish() {
@@ -123,6 +118,4 @@ class MomentFragment : Fragment() {
             binding.tvCountdown.visibility = View.GONE
         }
     }
-
-
 }
