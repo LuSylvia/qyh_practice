@@ -20,14 +20,6 @@ import com.example.module_common.R;
 public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     //动画总时间，包括雷达扫描、扩散圆
     private final long totalTime = 3600L;
-    //小圆半径
-    private final float smallCircleRadius;
-    //小圆颜色
-    private final int smallCircleColor;
-    //扩散圆颜色
-    private final int diffusionCircleColor;
-    //雷达画笔的颜色
-    private final int radarColor = getResources().getColor(R.color.purple_200);
     private SurfaceHolder surfaceHolder;
     //与surfaceHolder绑定的canvas
     private Canvas mCanvas;
@@ -38,8 +30,16 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
     private volatile boolean isRunning;
     //大圆半径
     private float bigCircleRadius;
+    //小圆半径
+    private final float smallCircleRadius;
     //扩散圆半径
     private float diffusionCircleRadius;
+    //小圆颜色
+    private final int smallCircleColor;
+    //扩散圆颜色
+    private final int diffusionCircleColor;
+    //雷达画笔的颜色
+    private final int radarColor = getResources().getColor(R.color.purple_200);
     //透明度
     private int mAlpha = 255;
     //圆心x坐标
