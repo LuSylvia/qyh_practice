@@ -20,6 +20,14 @@ import com.example.module_common.R;
 public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     //动画总时间，包括雷达扫描、扩散圆
     private final long totalTime = 3600L;
+    //小圆半径
+    private final float smallCircleRadius;
+    //小圆颜色
+    private final int smallCircleColor;
+    //扩散圆颜色
+    private final int diffusionCircleColor;
+    //雷达画笔的颜色
+    private final int radarColor = getResources().getColor(R.color.purple_200);
     private SurfaceHolder surfaceHolder;
     //与surfaceHolder绑定的canvas
     private Canvas mCanvas;
@@ -30,16 +38,8 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
     private volatile boolean isRunning;
     //大圆半径
     private float bigCircleRadius;
-    //小圆半径
-    private final float smallCircleRadius;
     //扩散圆半径
     private float diffusionCircleRadius;
-    //小圆颜色
-    private final int smallCircleColor;
-    //扩散圆颜色
-    private final int diffusionCircleColor;
-    //雷达画笔的颜色
-    private final int radarColor = getResources().getColor(R.color.purple_200);
     //透明度
     private int mAlpha = 255;
     //圆心x坐标
@@ -121,21 +121,23 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-        //开启线程
-        isRunning = true;
-        drawThread = new Thread(this);
-        drawThread.start();
     }
+
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-
+        if (!isRunning || drawThread == null || drawThread.getState() == Thread.State.TERMINATED) {
+            isRunning = true;
+            drawThread = new Thread(this);
+            drawThread.start();
+        }
     }
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         isRunning = false;
-        holder.removeCallback(this);
+        drawThread = null;
+        //holder.removeCallback(this);
     }
 
 
@@ -170,7 +172,7 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
             radarPaint.setShader(sweepGradient);
         }
         //计算指针偏移角度
-        offsetAngles=360*progress;
+        offsetAngles = 360 * progress;
         //雷达扫描的实现
         mCanvas.save();
         mCanvas.rotate(offsetAngles, centerX, centerY);
@@ -185,10 +187,10 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
 
     //计算进度值
     float countProgress() {
-        if(currentTime-startTime>totalTime){
+        if (currentTime - startTime > totalTime) {
             //超过一次动画最大时间，该初始化了
-            currentTime=0L;
-            startTime=0L;
+            currentTime = 0L;
+            startTime = 0L;
         }
         if (startTime == 0L) {
             startTime = System.currentTimeMillis();
@@ -202,18 +204,20 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
         try {
             mCanvas = surfaceHolder.lockCanvas();
             if (mCanvas != null) {
-                //clearCanvas(mCanvas);
+                clearCanvas(mCanvas);
                 //白色背景
                 mCanvas.drawColor(Color.WHITE);
+                //计算进度值，统一使用
+                float progress = countProgress();
                 //开始绘图，需要绘制： 雷达扫描 扩散圆 小圆
                 //顺序不能变！否则会出现覆盖现象，导致小圆被雷达扫描挡住
-                drawRadar(mCanvas, countProgress());
-                drawDiffusionCircle(mCanvas, countProgress());
+                drawRadar(mCanvas, progress);
+                drawDiffusionCircle(mCanvas, progress);
                 drawSmallCircle(mCanvas);
 
             } else {
-                Log.d("Sylvia-draw-error", "nsnmn");
-                throw new NullPointerException("你的canvas是空的！");
+                Log.d("Sylvia-draw-error", "nsnmn,canvas是空的！");
+                //throw new NullPointerException("你的canvas是空的！");
             }
         } catch (Exception e) {
             e.printStackTrace();

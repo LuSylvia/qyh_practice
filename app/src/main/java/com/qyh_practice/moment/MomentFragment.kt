@@ -31,7 +31,8 @@ class MomentFragment : Fragment() {
             run {
                 if (countDownTimer != null) {
                     countDownTimer?.cancel()
-                    angelThankCountDown()
+                    binding.tvCountdown.text = "The World!"
+                    //angelThankCountDown()
                 } else {
                     binding.tvCountdown.text = "The World!"
                 }
