@@ -217,7 +217,6 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
 
             } else {
                 Log.d("Sylvia-draw-error", "nsnmn,canvas是空的！");
-                //throw new NullPointerException("你的canvas是空的！");
             }
         } catch (Exception e) {
             e.printStackTrace();
