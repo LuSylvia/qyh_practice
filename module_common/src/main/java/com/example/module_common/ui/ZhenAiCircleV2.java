@@ -121,21 +121,22 @@ public class ZhenAiCircleV2 extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-        //开启线程
-        isRunning = true;
-        drawThread = new Thread(this);
-        drawThread.start();
     }
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-
+        //开启线程
+        if (!isRunning || drawThread == null || drawThread.getState() == Thread.State.TERMINATED) {
+            isRunning = true;
+            drawThread = new Thread(this);
+            drawThread.start();
+        }
     }
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         isRunning = false;
-        holder.removeCallback(this);
+        drawThread = null;
     }
 
 
